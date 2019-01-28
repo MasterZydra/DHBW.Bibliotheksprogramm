@@ -4,3 +4,5 @@
 *.pbxproj
 *.xcworkspacedata
 *.gch
+*.sh
+*.out
