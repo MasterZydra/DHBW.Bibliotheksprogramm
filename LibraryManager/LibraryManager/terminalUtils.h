@@ -10,6 +10,9 @@
 #define terminalUtils_h
 
 #include <stdio.h>
+#include <stdarg.h>
+
+int terminalInput(const char *, ...);
 
 void clear_keyboardBuffer(void);
 

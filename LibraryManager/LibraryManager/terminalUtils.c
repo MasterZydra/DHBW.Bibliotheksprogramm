@@ -11,6 +11,25 @@
 #include <stdlib.h>
 
 /**
+ Read input with given format and empty keyboard buffer afterwards
+
+ @param format Format of input
+ @param ... List of all variables to fill
+ @return Number of read parameters
+ */
+int terminalInput(const char *format, ...) {
+    int count = 0;
+    va_list args;
+    // Pass variable parameters
+    va_start(args, format);
+    count = vfscanf(stdin, format, args);
+    va_end(args);
+    
+    clear_keyboardBuffer();
+    return count;
+}
+
+/**
  Clearing input buffer
  */
 void clear_keyboardBuffer()
