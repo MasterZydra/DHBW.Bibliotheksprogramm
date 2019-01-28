@@ -11,4 +11,8 @@
 
 #include <stdio.h>
 
+void clear_keyboardBuffer(void);
+
+void clear_screen(void);
+
 #endif /* terminalUtils_h */

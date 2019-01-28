@@ -2,8 +2,8 @@
 //  terminalUtils.c
 //  LibraryManager
 //
-//  Created by David Hein on 26.01.19.
-//  Copyright © 2019 David Hein. All rights reserved.
+//  Created by David Hein & Felix Hieser on 26.01.19.
+//  Copyright © 2019 David Hein & Felix Hieser. All rights reserved.
 //
 
 #include "terminalUtils.h"
