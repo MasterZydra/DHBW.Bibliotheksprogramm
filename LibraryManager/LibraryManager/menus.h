@@ -33,7 +33,7 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 #define MAINMENU_MANMODE() {\
     printf(" 4 Abmelden\n");\
     printf(" 5 Buch hinzufügen\n");\
-    printf(" 6 Buch enfernen\n");\
+    printf(" 6 Buch entfernen\n");\
 }
 
 #define MAINMENU_NOMANMODE() {\
