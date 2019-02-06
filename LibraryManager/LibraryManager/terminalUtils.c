@@ -22,9 +22,10 @@ int terminalInput(const char *format, ...) {
     va_list args;
     // Pass variable parameters
     va_start(args, format);
+    // Do scanf
     count = vfscanf(stdin, format, args);
     va_end(args);
-
+    // Clear input buffer after input processing
     clear_inputBuffer();
     return count;
 }
