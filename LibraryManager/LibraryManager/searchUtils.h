@@ -10,5 +10,11 @@
 #define searchUtils_h
 
 #include <stdio.h>
+#include <string.h>
+
+// Get minimum of 3 values
+#define MIN3(a, b, c) ((a) < (b) ? ((a) < (c) ? (a) : (c)) : ((b) < (c) ? (b) : (c)))
+
+int levenshtein(const char *, const char *);
 
 #endif /* searchUtils_h */
