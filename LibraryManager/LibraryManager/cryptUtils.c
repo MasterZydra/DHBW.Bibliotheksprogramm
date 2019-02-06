@@ -8,6 +8,8 @@
 
 #include "cryptUtils.h"
 
+// https://de.wikipedia.org/wiki/Extended_Tiny_Encryption_Algorithm
+
 // Idee:
 // Bei Speichern mit Zufall Schlüsselbits generieren,
 // Anzahl Durchlaufzyklus auch zufällig wählen.
