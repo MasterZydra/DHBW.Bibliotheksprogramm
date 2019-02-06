@@ -24,15 +24,15 @@ int terminalInput(const char *format, ...) {
     va_start(args, format);
     count = vfscanf(stdin, format, args);
     va_end(args);
-    
-    clear_keyboardBuffer();
+
+    clear_inputBuffer();
     return count;
 }
 
 /**
  Clearing input buffer
  */
-void clear_keyboardBuffer()
+void clear_inputBuffer()
 {
     char c;
     while ( (c = getchar()) != '\n' && c != EOF);

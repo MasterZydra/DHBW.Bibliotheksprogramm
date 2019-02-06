@@ -14,7 +14,7 @@
 
 int terminalInput(const char *, ...);
 
-void clear_keyboardBuffer(void);
+void clear_inputBuffer(void);
 
 void clear_screen(void);
 
