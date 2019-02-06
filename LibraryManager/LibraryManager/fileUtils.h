@@ -10,5 +10,8 @@
 #define fileUtils_h
 
 #include <stdio.h>
+#include <string.h>
+
+void getFileContent(char *fileName, void (*readNewLineEvent) (const char *));
 
 #endif /* fileUtils_h */
