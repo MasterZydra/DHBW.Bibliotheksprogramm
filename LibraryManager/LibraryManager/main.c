@@ -18,7 +18,7 @@
 
 
 
-enum dataCol { dcISBN, dcTitle, dcAuthor, dcBorrower };
+
 
 
 void getBorrower(const char *borrowers) {
@@ -77,33 +77,16 @@ void readNewLineEvent(const char *line) {
 
 int main(int argc, const char * argv[]) {
     
-
-    
     getFileContent("./lib.bd", readNewLineEvent);
     printf("\n");
-//    char* line = "";
-//    FILE *data = fopen("lib.db", "rt");
-////    fseek(data, 0, SEEK_SET);
-//
-//
-//    while (!feof(data)) {
-//        printf("Res: %s\n", fgets(line, 100000, data));
-//        printf("Text: %s\n", line);
-//    }
-    
-    
     return 0;
     
 //    char a = getchar();
 //    if (a == 10) printf("is 10\n");
 //    if (a == '\n') printf("is /n\n");
-//    printf("%d\n", a);
-//    int test, test2;
-//    printf("number:");
-//    terminalInput("%d %d", &test, &test2);
-//    printf("Input: %d %d\n", test, test2);
+      //  return 0;
     
-  //  return 0;
+    
 //    while (mainMenu() != 0) {};
 //    return 0;
     

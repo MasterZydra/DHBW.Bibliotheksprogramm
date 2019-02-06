@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <string.h>
 
+enum dataCol { dcISBN, dcTitle, dcAuthor, dcBorrower };
+
 void getFileContent(char *fileName, void (*readNewLineEvent) (const char *));
 
 #endif /* fileUtils_h */
