@@ -6,3 +6,7 @@
 *.gch
 *.sh
 *.out
+*.layout
+*.depend
+bin/
+obj/
