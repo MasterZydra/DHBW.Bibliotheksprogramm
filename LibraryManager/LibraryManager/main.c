@@ -43,7 +43,7 @@ void readNewLineEvent(const char *line) {
     char *sub;
     char curLine[strlen(line)];
     
-    enum dataCol dc = dcISBN;
+    dataCol_t dc = dcISBN;
     
     strcpy(curLine, line);
     
@@ -76,10 +76,9 @@ void readNewLineEvent(const char *line) {
 }
 
 int main(int argc, const char * argv[]) {
-    
-    getFileContent("./lib.bd", readNewLineEvent);
-    printf("\n");
-    return 0;
+//    getFileContent("./lib.bd", readNewLineEvent);
+//    printf("\n");
+//    return 0;
     
 //    char a = getchar();
 //    if (a == 10) printf("is 10\n");
@@ -87,8 +86,8 @@ int main(int argc, const char * argv[]) {
       //  return 0;
     
     
-//    while (mainMenu() != 0) {};
-//    return 0;
+    mainMenu();
+    return 0;
     
     // Ideen:
     // Einstellungen
