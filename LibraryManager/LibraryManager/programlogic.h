@@ -10,7 +10,14 @@
 #define programlogic_h
 
 #include <stdio.h>
+#include <stdbool.h>
+#include "terminalUtils.h"
+#include "searchUtils.h"
 
 int mainMenu(void);
+
+void searchMenu(bool);
+
+int searchMenuText(bool, searchCol_t);
 
 #endif /* programlogic_h */
