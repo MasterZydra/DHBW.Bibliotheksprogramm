@@ -14,7 +14,7 @@
  @param fileName Name of file
  @param readNewLineEvent Function which processes line
  */
-void getFileContent(char *fileName, void (*readNewLineEvent) (const char *)) {
+void readFile(char *fileName, void (*readNewLineEvent) (const char *)) {
     int datalen = 100;
     char data[datalen];
     char *filecont;
@@ -30,6 +30,30 @@ void getFileContent(char *fileName, void (*readNewLineEvent) (const char *)) {
         filecont[strlen(filecont) - 1] = 0;
         readNewLineEvent(filecont);
     }
+    // Finally close file
+    fclose(file);
+}
+
+/**
+ Write given data to file
+
+ @param fileName Name of file
+ @param data Data to write into file
+ */
+void writeFile(char *fileName, const char *data) {
+    char buffer[strlen(data) + 1];
+    // Open file
+    FILE *file = fopen(fileName, "wb");
+    // Error message if no file opened
+    if(file == NULL) {
+        perror("File");
+        return;
+    }
+    // Copy data to buffer
+    strcpy(buffer, data);
+    buffer[strlen(data) + 1] = 0;
+    // Write data to file
+    fwrite(buffer, sizeof(buffer), 1, file);
     // Finally close file
     fclose(file);
 }
