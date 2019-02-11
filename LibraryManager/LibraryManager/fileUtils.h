@@ -13,6 +13,7 @@
 #include <string.h>
 
 enum dataCol { dcISBN, dcTitle, dcAuthor, dcBorrower };
+typedef enum dataCol dataCol_t;
 
 void getFileContent(char *fileName, void (*readNewLineEvent) (const char *));
 
