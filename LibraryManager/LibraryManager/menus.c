@@ -42,6 +42,11 @@ void printSearchMenu() {
     MENU_INPUT();
 }
 
+/**
+ Print search menu input of search text
+
+ @param sc columns which will be searched in.
+ */
 void printSearchMenuText(enum searchCol sc) {
     clear_screen();
     TITLE();

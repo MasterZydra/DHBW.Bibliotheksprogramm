@@ -15,7 +15,7 @@
 
 void printMainMenu(bool);
 
-void printSearchMenu();
+void printSearchMenu(void);
 
 void printSearchMenuText(enum searchCol);
 
