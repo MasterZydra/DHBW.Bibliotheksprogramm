@@ -11,10 +11,11 @@
 #include <stdlib.h>
 
 /**
- Read input with given format and empty keyboard buffer afterwards
+ Read input with given format and empty keyboard buffer afterwards.
+ Use it like scanf().
 
  @param format Format of input
- @param ... List of all variables to fill
+ @param ... List of all pointers of variables to fill
  @return Number of read parameters
  */
 int terminalInput(const char *format, ...) {
