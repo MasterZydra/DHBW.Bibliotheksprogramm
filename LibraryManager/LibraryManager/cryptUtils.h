@@ -9,10 +9,7 @@
 #ifndef cryptUtils_h
 #define cryptUtils_h
 
-
-
 #include <stdio.h>
 #include <stdint.h>
-
 
 #endif /* cryptUtils_h */
