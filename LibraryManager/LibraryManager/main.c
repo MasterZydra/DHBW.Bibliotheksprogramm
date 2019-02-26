@@ -35,7 +35,7 @@ void getSubList(char **dataList, const char *dataLine) {
     int cnt = 0;
     while (sub) {
         if (cnt == 0) {
-            dataList = malloc(sizeof(char**));
+            //dataList = malloc(sizeof(char**));
         }
         else {
             dataList = realloc(dataList, sizeof(char**) * (cnt + 1));
@@ -71,6 +71,7 @@ void readNewLineEvent(bookData **books, const char *line) {
                 printf("Title: %s\n", books[0]->title);
                 break;
             case dcAuthor:
+                books[0]->author = malloc(sizeof(char**));
                 getSubList(books[0]->author, sub);
                 break;
             case dcAmount:
@@ -78,6 +79,7 @@ void readNewLineEvent(bookData **books, const char *line) {
                 printf("Amount: %d\n", books[0]->amount);
                 break;
             case dcBorrower:
+                books[0]->borrowers = malloc(sizeof(char**));
                 getSubList(books[0]->borrowers, sub);
                 break;
             default:
