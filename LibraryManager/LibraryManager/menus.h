@@ -19,6 +19,8 @@ void printSearchMenu(void);
 
 void printSearchMenuText(searchCol);
 
+void printListMenu(void);
+
 #define TITLE() {\
 printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 printf(" Bibliotheksprogramm\n");\
@@ -67,6 +69,11 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 
 #define MENU_INPUT() {\
     printf("Auswahl: ");\
+}
+
+#define LIST_HEADLINE() {\
+    printf(" |Titel 25                 |Author 25                |ISBN 13      |Anzahl 10 |\n");\
+    printf("-+-------------------------+-------------------------+-------------+----------+\n");\
 }
 
 #endif /* menus_h */
