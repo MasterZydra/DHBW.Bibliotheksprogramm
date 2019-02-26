@@ -15,7 +15,7 @@
  @param readNewLineEvent Function which processes line
  */
 void readFile(bookData **books, char *fileName, void (*readNewLineEvent) (bookData **, const char *)) {
-    int datalen = 100;
+    int datalen = 300;
     char data[datalen];
     char *filecont;
     // Open file
