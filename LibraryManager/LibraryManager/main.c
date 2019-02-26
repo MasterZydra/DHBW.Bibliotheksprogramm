@@ -23,24 +23,33 @@
 
 
 
-void getBorrower(const char *borrowers) {
+void getSubList(char **dataList, const char *dataLine) {
     char delimiter[] = ";";
     char *sub;
-    char curBorrower[strlen(borrowers)];
+    char curDataLine[strlen(dataLine)];
     
-    strcpy(curBorrower, borrowers);
+    strcpy(curDataLine, dataLine);
     
     // Init and create first section
-    sub = strtok(curBorrower, delimiter);
-    
+    sub = strtok(curDataLine, delimiter);
+    int cnt = 0;
     while (sub) {
-        printf("Borrower: %s\n", sub);
+        if (cnt == 0) {
+            dataList = malloc(sizeof(char**));
+        }
+        else {
+            dataList = realloc(dataList, sizeof(char**) * (cnt + 1));
+        }
+        dataList[cnt] = allocMem(sub, (int)strlen(sub));
+        
+        printf("Sub-Item: %s\n",dataList[cnt]);
         // Create next section
         sub = strtok(NULL, delimiter);
+        cnt++;
     }
 }
 
-void readNewLineEvent(const char *line) {
+void readNewLineEvent(bookData **books, const char *line) {
     char delimiter[] = "|";
     char *sub;
     char curLine[strlen(line)];
@@ -50,24 +59,26 @@ void readNewLineEvent(const char *line) {
     strcpy(curLine, line);
     // Init and create first section
     sub = strtok(curLine, delimiter);
-    
+    if (books[0] == NULL) books[0] = malloc(sizeof(bookData));
     while (sub) {
         switch (dc) {
             case dcISBN:
-                printf("\nISBN: %s\n", sub);
-                printf("'%s'", allocMem(sub, (int)strlen(sub)));
+                books[0]->isbn = allocMem(sub, (int)strlen(sub));
+                printf("\nISBN: %s\n", books[0]->isbn);
                 break;
             case dcTitle:
-                printf("Title: %s\n", sub);
+                books[0]->title = allocMem(sub, (int)strlen(sub));
+                printf("Title: %s\n", books[0]->title);
                 break;
             case dcAuthor:
-                printf("Author: %s\n", sub);
+                getSubList(books[0]->author, sub);
                 break;
             case dcAmount:
-                printf("Amount: %s\n", sub);
+                books[0]->amount = (int) strtol(sub, (char **)NULL, 10);
+                printf("Amount: %d\n", books[0]->amount);
                 break;
             case dcBorrower:
-                getBorrower(sub);
+                getSubList(books[0]->borrowers, sub);
                 break;
             default:
                 printf("Other: %s\n", sub);
@@ -79,14 +90,15 @@ void readNewLineEvent(const char *line) {
     }
 }
 
-
-
-
-
 int main(int argc, const char * argv[]) {
+    bookData **data = calloc(1, sizeof(bookData**));
+//    writeFile("./lib.bbd", "abch?\nHallo wie geht es dir?");
+    readFile(data, "./lib.bd", readNewLineEvent);
+    return 0;
     
-    //writeFile("./lib.bbd", "abch?\nHallo wie geht es dir?");
-   readFile("./lib.bd", readNewLineEvent);
+    freeBookData(data);
+    
+    //freeBookData(data);
 //    printf("\n");
 //    return 0;
     
