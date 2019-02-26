@@ -12,8 +12,9 @@
 #include <stdio.h>
 #include <string.h>
 
-enum searchCol { scAll, scISBN, scTitle, scAuthor, scBorrower };
-typedef enum searchCol searchCol_t;
+typedef enum {
+    scAll, scISBN, scTitle, scAuthor, scBorrower
+} searchCol;
 
 // Get minimum of 3 values
 #define MIN3(a, b, c) ((a) < (b) ? ((a) < (c) ? (a) : (c)) : ((b) < (c) ? (b) : (c)))

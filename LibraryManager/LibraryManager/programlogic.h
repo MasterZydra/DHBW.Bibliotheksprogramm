@@ -18,6 +18,6 @@ int mainMenu(void);
 
 void searchMenu(bool);
 
-int searchMenuText(bool, searchCol_t);
+int searchMenuText(bool, searchCol);
 
 #endif /* programlogic_h */

@@ -47,7 +47,7 @@ void printSearchMenu() {
 
  @param sc columns which will be searched in.
  */
-void printSearchMenuText(enum searchCol sc) {
+void printSearchMenuText(searchCol sc) {
     clear_screen();
     TITLE();
     BACK();

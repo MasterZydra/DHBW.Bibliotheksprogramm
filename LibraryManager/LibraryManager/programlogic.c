@@ -70,7 +70,7 @@ void searchMenu(bool manageMode) {
     }
 }
 
-int searchMenuText(bool manageMode, searchCol_t sc) {
+int searchMenuText(bool manageMode, searchCol sc) {
     char input[100];
     printSearchMenuText(sc);
     terminalInput("%s", &input);

@@ -17,7 +17,7 @@ void printMainMenu(bool);
 
 void printSearchMenu(void);
 
-void printSearchMenuText(enum searchCol);
+void printSearchMenuText(searchCol);
 
 #define TITLE() {\
 printf("~~~~~~~~~~~~~~~~~~~~~\n");\

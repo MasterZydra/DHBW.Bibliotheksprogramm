@@ -12,8 +12,10 @@
 #include <stdio.h>
 #include <string.h>
 
-enum dataCol { dcISBN, dcTitle, dcAuthor, dcBorrower };
-typedef enum dataCol dataCol_t;
+typedef enum {
+    dcISBN, dcTitle, dcAuthor, dcAmount, dcBorrower
+} dataCol;
+//typedef enum dataCol dataCol_t;
 
 void readFile(char *, void (*readNewLineEvent) (const char *));
 
