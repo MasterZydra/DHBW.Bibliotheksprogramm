@@ -16,14 +16,14 @@
 typedef struct {
     char *isbn;
     char *title;
-    char *author;
+    char **author;
     int amount;
     char **borrowers;
 } bookData;
 
-void freeBorrowers(char **);
+void freeSubBookData(char **);
 
-void freeBookData(bookData *);
+void freeBookData(bookData **);
 
 char *allocMem(const char *, int);
 

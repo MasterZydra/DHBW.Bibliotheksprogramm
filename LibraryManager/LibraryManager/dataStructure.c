@@ -8,18 +8,20 @@
 
 #include "dataStructure.h"
 
-void freeBorrowers(char **borrowers) {
-    for (int i=0; borrowers[i] != NULL; i++)
-        free(borrowers[i]);
-    free(borrowers);
+void freeSubBookData(char **charPP) {
+    for (int i=0; charPP[i] != NULL; i++)
+        free(charPP[i]);
+    free(charPP);
 }
 
-void freeBookData(bookData *bd) {
-    free(bd->isbn);
-    free(bd->title);
-    free(bd->author);
-    free(bd->borrowers);
-    free(bd);
+void freeBookData(bookData **bds) {
+    for (bookData *bd = bds[0]; bd != NULL; bd++) {
+        freeSubBookData(bd->author);
+        freeSubBookData(bd->borrowers);
+        free(bd->isbn);
+        free(bd->title);
+        free(bd);
+    }
 }
 
 char *allocMem(const char *data, int len) {
