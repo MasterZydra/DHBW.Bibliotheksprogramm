@@ -12,12 +12,14 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "dataStructure.h"
+
 typedef enum {
     dcISBN, dcTitle, dcAuthor, dcAmount, dcBorrower
 } dataCol;
 //typedef enum dataCol dataCol_t;
 
-void readFile(char *, void (*readNewLineEvent) (const char *));
+void readFile(bookData **, char *, void (*readNewLineEvent) (bookData **, const char *));
 
 void writeFile(char *, const char *);
 

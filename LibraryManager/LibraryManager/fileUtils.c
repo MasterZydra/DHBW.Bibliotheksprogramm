@@ -14,7 +14,7 @@
  @param fileName Name of file
  @param readNewLineEvent Function which processes line
  */
-void readFile(char *fileName, void (*readNewLineEvent) (const char *)) {
+void readFile(bookData **books, char *fileName, void (*readNewLineEvent) (bookData **, const char *)) {
     int datalen = 100;
     char data[datalen];
     char *filecont;
@@ -28,7 +28,7 @@ void readFile(char *fileName, void (*readNewLineEvent) (const char *)) {
     // Read each line and trigger readNewLine event
     for(; (filecont = fgets(data, datalen,file)) ;) {
         filecont[strlen(filecont) - 1] = 0;
-        readNewLineEvent(filecont);
+        readNewLineEvent(books, filecont);
     }
     // Finally close file
     fclose(file);
