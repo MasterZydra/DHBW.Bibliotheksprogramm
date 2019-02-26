@@ -11,10 +11,12 @@
 #include "programlogic.h"
 #include "fileUtils.h"
 #include "searchUtils.h"
+#include "dataStructure.h"
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 
 
 
@@ -43,10 +45,9 @@ void readNewLineEvent(const char *line) {
     char *sub;
     char curLine[strlen(line)];
     
-    dataCol_t dc = dcISBN;
+    dataCol dc = dcISBN;
     
     strcpy(curLine, line);
-    
     // Init and create first section
     sub = strtok(curLine, delimiter);
     
@@ -54,12 +55,16 @@ void readNewLineEvent(const char *line) {
         switch (dc) {
             case dcISBN:
                 printf("\nISBN: %s\n", sub);
+                printf("'%s'", allocMem(sub, (int)strlen(sub)));
                 break;
             case dcTitle:
                 printf("Title: %s\n", sub);
                 break;
             case dcAuthor:
                 printf("Author: %s\n", sub);
+                break;
+            case dcAmount:
+                printf("Amount: %s\n", sub);
                 break;
             case dcBorrower:
                 getBorrower(sub);
@@ -68,15 +73,20 @@ void readNewLineEvent(const char *line) {
                 printf("Other: %s\n", sub);
                 break;
         }
-        
         // Create next section
         sub = strtok(NULL, delimiter);
         dc++;
     }
 }
 
+
+
+
+
 int main(int argc, const char * argv[]) {
-//    getFileContent("./lib.bd", readNewLineEvent);
+    
+    //writeFile("./lib.bbd", "abch?\nHallo wie geht es dir?");
+   readFile("./lib.bd", readNewLineEvent);
 //    printf("\n");
 //    return 0;
     
@@ -86,7 +96,7 @@ int main(int argc, const char * argv[]) {
       //  return 0;
     
     
-    mainMenu();
+   // mainMenu();
     return 0;
     
     // Ideen:
