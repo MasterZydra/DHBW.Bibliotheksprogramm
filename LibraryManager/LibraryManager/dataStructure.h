@@ -19,6 +19,7 @@ typedef struct {
     char **author;
     int amount;
     char **borrowers;
+    int sortOrder;
 } bookData;
 
 void freeSubBookData(char **);
