@@ -14,7 +14,7 @@
  @param fileName Name of file
  @param readNewLineEvent Function which processes line
  */
-void readFile(bookData **books, char *fileName, void (*readNewLineEvent) (bookData **, const char *)) {
+void readFile(bookData ***books, char *fileName, void (*readNewLineEvent) (bookData ***, const char *)) {
     int datalen = 300;
     char data[datalen];
     char *filecont;

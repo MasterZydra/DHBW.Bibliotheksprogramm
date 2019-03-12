@@ -19,7 +19,7 @@ typedef enum {
 } dataCol;
 //typedef enum dataCol dataCol_t;
 
-void readFile(bookData **, char *, void (*readNewLineEvent) (bookData **, const char *));
+void readFile(bookData ***, char *, void (*readNewLineEvent) (bookData ***, const char *));
 
 void writeFile(char *, const char *);
 
