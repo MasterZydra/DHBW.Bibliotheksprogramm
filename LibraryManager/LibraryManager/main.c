@@ -22,6 +22,7 @@ int main(int argc, const char * argv[]) {
     bookData **data = calloc(1, sizeof(bookData**));
     readFile(&data, "./lib.bd", readNewLineEvent);
     printBookData(data);
+    freeBookData(&data);
     return 0;
 //    writeFile("./lib.bbd", "abch?\nHallo wie geht es dir?");
 //    freeBookData(data);
