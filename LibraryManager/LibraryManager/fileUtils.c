@@ -134,7 +134,7 @@ void readNewLineEvent(bookData ***books, const char *line) {
  @param dst CSV string
  @param cursorPos Current cursor position
  */
-void addToCSV(char* src, char* dst, int *cursorPos) {
+void addStrAtPos(char* src, char* dst, int *cursorPos) {
     int len = (int)strlen(src);
     memcpy(&(dst[*cursorPos]), src, len);
     *cursorPos = *cursorPos + len;
@@ -147,7 +147,7 @@ void addToCSV(char* src, char* dst, int *cursorPos) {
  @param dst CSV string
  @param cursorPos Current cursor position
  */
-void addCharToCSV(char src, char* dst, int *cursorPos) {
+void addCharToPos(char src, char* dst, int *cursorPos) {
     dst[*cursorPos] = src;
     (*cursorPos)++;
 }
@@ -163,31 +163,31 @@ char *bookDataToCSV(bookData **books) {
     int cursorPos = 0;
     for (int curPos = 0; books[curPos] != NULL; curPos++) {
         // ISBN
-        addToCSV(books[curPos]->isbn, csv, &cursorPos);
-        addCharToCSV('|', csv, &cursorPos);
+        addStrAtPos(books[curPos]->isbn, csv, &cursorPos);
+        addCharToPos('|', csv, &cursorPos);
         // Title
-        addToCSV(books[curPos]->title, csv, &cursorPos);
-        addCharToCSV('|', csv, &cursorPos);
+        addStrAtPos(books[curPos]->title, csv, &cursorPos);
+        addCharToPos('|', csv, &cursorPos);
         // Author
         for (int i = 0; (books[curPos]->author)[i] != NULL; i++) {
-            addToCSV((books[curPos]->author)[i], csv, &cursorPos);
-            addCharToCSV(';', csv, &cursorPos);
+            addStrAtPos((books[curPos]->author)[i], csv, &cursorPos);
+            addCharToPos(';', csv, &cursorPos);
         }
-        addCharToCSV('|', csv, &cursorPos);
+        addCharToPos('|', csv, &cursorPos);
         // Amount - Convert int to char*
         char *amount = malloc(sizeof(char) * 5);
         sprintf(amount, "%d", books[curPos]->amount);
-        addToCSV(amount, csv, &cursorPos);
+        addStrAtPos(amount, csv, &cursorPos);
         free(amount);
-        addCharToCSV('|', csv, &cursorPos);
+        addCharToPos('|', csv, &cursorPos);
         // Borrower
         for (int i = 0; (books[curPos]->borrowers)[i] != NULL; i++) {
-            addToCSV((books[curPos]->borrowers)[i], csv, &cursorPos);
-            addCharToCSV(';', csv, &cursorPos);
+            addStrAtPos((books[curPos]->borrowers)[i], csv, &cursorPos);
+            addCharToPos(';', csv, &cursorPos);
         }
         // Linebreak
-        addCharToCSV('\n', csv, &cursorPos);
+        addCharToPos('\n', csv, &cursorPos);
     }
-    addCharToCSV('\0', csv, &cursorPos);
+    addCharToPos('\0', csv, &cursorPos);
     return csv;
 }
