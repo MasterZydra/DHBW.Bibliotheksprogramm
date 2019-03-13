@@ -13,18 +13,25 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "terminalUtils.h"
+
 typedef struct {
     char *isbn;
     char *title;
     char **author;
     int amount;
     char **borrowers;
+    int sortOrder;
 } bookData;
 
-void freeSubBookData(char **);
+void freeSubBookData(char ***);
 
-void freeBookData(bookData **);
+void freeBookData(bookData ***);
 
 char *allocMem(const char *, int);
+
+void getSubList(char ***, char *);
+
+void printBookData(bookData **);
 
 #endif /* dataStructure_h */
