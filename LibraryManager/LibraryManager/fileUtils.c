@@ -57,3 +57,73 @@ void writeFile(char *fileName, const char *data) {
     // Finally close file
     fclose(file);
 }
+
+/**
+ Gets one data line from file and saves it content into the
+ data structure.
+
+ @param books Pointer of Pointer of book array
+ @param line Pointer of line
+ */
+void readNewLineEvent(bookData ***books, const char *line) {
+    // Check if line is not empty
+    if (strlen(line) == 0) return;
+    
+    char *authors = 0;
+    char *borrowers = 0;
+    int curPos = 0;
+    dataCol dc = dcISBN;
+    // Create copy of line
+    char curLine[strlen(line)];
+    strcpy(curLine, line);
+    // Init and create first section
+    char delimiter[] = "|";
+    char *sub = strtok(curLine, delimiter);
+    // Find last filled book struct
+    for (bookData *bd = **books; bd != NULL; bd = (*books)[curPos])
+        curPos++;
+    // Increase size of book array
+    bookData **oldPointer = *books;
+    *books = (bookData **)calloc(curPos + 2, sizeof(bookData*));
+    memcpy(*books, oldPointer, sizeof(bookData*) * (curPos + 1));
+    free(oldPointer);
+    // Allocate space for one book
+    (*books)[curPos] = malloc(sizeof(bookData));
+    // Save data in struct
+    while (sub) {
+        switch (dc) {
+            case dcISBN:
+                (*books)[curPos]->isbn = allocMem(sub, (int)strlen(sub));
+                break;
+            case dcTitle:
+                (*books)[curPos]->title = allocMem(sub, (int)strlen(sub));
+                break;
+            case dcAuthor:
+                authors = allocMem(sub, (int)strlen(sub));
+                break;
+            case dcAmount:
+                (*books)[curPos]->amount = (int) strtol(sub, (char **)NULL, 10);
+                break;
+            case dcBorrower:
+                borrowers = allocMem(sub, (int)strlen(sub));
+                break;
+            default:
+                printf("Error: Column will not be processed: '%s'\n", sub);
+                break;
+        }
+        // Create next section
+        sub = strtok(NULL, delimiter);
+        dc++;
+    }
+    // Process authors and save in struct
+    if (authors != NULL) {
+        getSubList(&(*books)[curPos]->author, authors);
+        free(authors);
+    }
+    // Process borrowers and save in struct
+    if (borrowers != NULL) {
+        getSubList(&(*books)[curPos]->borrowers, borrowers);
+        free(borrowers);
+    }
+    (*books)[curPos]->sortOrder = curPos + 1;
+}

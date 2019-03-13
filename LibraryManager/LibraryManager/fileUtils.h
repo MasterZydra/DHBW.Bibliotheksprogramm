@@ -17,10 +17,11 @@
 typedef enum {
     dcISBN, dcTitle, dcAuthor, dcAmount, dcBorrower
 } dataCol;
-//typedef enum dataCol dataCol_t;
 
 void readFile(bookData ***, char *, void (*readNewLineEvent) (bookData ***, const char *));
 
 void writeFile(char *, const char *);
+
+void readNewLineEvent(bookData ***, const char *);
 
 #endif /* fileUtils_h */

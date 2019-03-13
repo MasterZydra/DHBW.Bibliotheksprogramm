@@ -28,4 +28,6 @@ void freeBookData(bookData **);
 
 char *allocMem(const char *, int);
 
+void getSubList(char ***, char *);
+
 #endif /* dataStructure_h */
