@@ -89,7 +89,6 @@ int searchMenuText(bool manageMode, searchCol sc) {
 
 int searchListMenu(bookData **listData) {
     char input = ' ';
-    bool manageMode = false;
 
     while (true) {
         printListMenu(listData);
@@ -118,7 +117,6 @@ int searchListMenu(bookData **listData) {
 
 int selectedBookMenu(bookData *selectedBook) {
     char input = ' ';
-    bool manageMode = false;
 
     while (true) {
         printSelectedBookData(selectedBook);
