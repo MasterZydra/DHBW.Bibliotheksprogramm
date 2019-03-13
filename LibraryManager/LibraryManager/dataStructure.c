@@ -100,3 +100,16 @@ void printBookData(bookData **books) {
         printf("\n");
     }
 }
+
+/**
+ Counts the number of books in the bookData array
+
+ @param books Book array
+ @return number of books
+ */
+int countBooks(bookData **books) {
+    int cnt = 0;
+    for (cnt = 0; books[cnt] != NULL; cnt++);
+    return cnt;
+}
+

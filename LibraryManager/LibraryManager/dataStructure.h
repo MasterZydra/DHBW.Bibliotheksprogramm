@@ -34,4 +34,6 @@ void getSubList(char ***, char *);
 
 void printBookData(bookData **);
 
+int countBooks(bookData **books);
+
 #endif /* dataStructure_h */
