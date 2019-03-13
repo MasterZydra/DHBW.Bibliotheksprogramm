@@ -7,9 +7,6 @@
 //
 
 #include "menus.h"
-#include "terminalUtils.h"
-#include "dataStructure.h"
-#include <stdlib.h>
 
 /**
  Print main menu
@@ -82,29 +79,38 @@ void printSearchMenuText(searchCol sc) {
 /**
  Print list menu with search results
 
- @param listData whole available sorted Booklist
+ @param listData Array of books which will be shown
  */
-
 void printListMenu(bookData **listData)
 {
     clear_screen();
     TITLE();
     LIST_HEADLINE();
 
-    for (int i=0;i<=9&&listData[i]!=NULL;i++)
-    {
-        printf("%d|",i+1);
-        printf("%-25s|",listData[i]->title);
-
-        printf("%-10s",listData[i]->author[0]);
-        for (int j=1;j <=listData[i]->author[sizeof(listData[i]->author)/sizeof(char*)-1]&&j<=3;j++)
-        {
-            printf(", %-10s",listData[i]->author[j]);
+    for (int i=0; (i < 10) && (listData[i] != NULL);i++) {
+        // Print number and title
+        printf(" %d | %-27s|", i+1, listData[i]->title);
+        // Build string contains authors with max length of 29
+        char *authors = malloc(31 * sizeof(char));
+        for (int j = 0; (listData[i]->author)[j] != NULL && j < 5; j++) {
+            if (j == 0) {
+                int len = (int)strlen((listData[i]->author)[j]) + 1;
+                memcpy(authors, listData[i]->author[j], ((len < 29) ? len : 28) );
+            }
+            else {
+                int len = (int)strlen(authors);
+                addCharToPos(',', authors, &len);
+                addCharToPos(' ', authors, &len);
+                memcpy(&authors[len], listData[i]->author[j], 30 - len);
+            }
         }
-        printf("|");
-        printf("%s|",listData[i]->isbn);
-        printf("%-10d|",listData[i]->amount);
+        authors[30] = '\0';
+        // Print rest of columns: authors, isbn, amount
+        printf(" %-29s| %-13s | %3d |\n", authors, listData[i]->isbn, listData[i]->amount);
+        free(authors);
     }
+    printf("\n");
+    
     BACK();
     MENU_FINISHLINE();
     LIST_MENU();
@@ -119,20 +125,16 @@ void printSelectedBookData (bookData *selectedBook)
     printf("Titel:             %s\n",selectedBook->title);
     printf("Author:            %s",selectedBook->author[0]);
 
-    for (int i=1;i<=(sizeof(selectedBook->author)/sizeof(char*))-1;i++)
-         {
-             printf(", %s",selectedBook->author[i]);
-         }
+    for (int i = 1; selectedBook->author[i] != NULL; i++)
+         printf(", %s",selectedBook->author[i]);
     printf("\n");
 
     printf("ISBN:              %s\n",selectedBook->isbn);
     printf("Verfügbare Bücher: %d\n",selectedBook->amount);
     printf("Ausleiher:         %s",selectedBook->borrowers[0]);
 
-    for (int j=1;j<=sizeof(selectedBook->borrowers)/sizeof(char*)-1;j++)
-         {
-             printf(", %s",selectedBook->borrowers[j]);
-         }
+    for (int i = 1; selectedBook->borrowers[i] != NULL; i++)
+        printf(", %s", selectedBook->borrowers[i]);
     printf("\n");
     BACK();
     MENU_FINISHLINE();

@@ -11,9 +11,12 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "searchUtils.h"
 #include "dataStructure.h"
+#include "terminalUtils.h"
+#include "fileUtils.h"
 
 void printMainMenu(bool);
 
@@ -21,9 +24,9 @@ void printSearchMenu(void);
 
 void printSearchMenuText(searchCol);
 
-void printListMenu(bookData**);
+void printListMenu(bookData **);
 
-void printSelectedBookData (bookData*);
+void printSelectedBookData(bookData *);
 
 
 #define TITLE() {\
@@ -77,8 +80,8 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define LIST_HEADLINE() {\
-    printf("i|Titel 25                 |Author 30                     |ISBN 13      |Anzahl 10 |\n");\
-    printf("-+-------------------------+------------------------------+-------------+----------+\n");\
+    printf(" i | Titel                      | Author                       | ISBN          | Anz |\n");\
+    printf("---+----------------------------+------------------------------+---------------+-----+\n");\
 }
 
 #define LIST_MENU() {\
