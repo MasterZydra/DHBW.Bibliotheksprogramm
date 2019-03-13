@@ -85,20 +85,18 @@ void getSubList(char ***dataList, char *dataLine) {
  */
 void printBookData(bookData **books) {
     clear_screen();
-    int curPos = 0;
-    for (bookData *bd = *books; bd != NULL; bd = books[curPos]) {
+    for (int curPos = 0; books[curPos] != NULL; curPos++) {
         printf("Book %i\n", curPos + 1);
-        printf("  Titel: %s\n", bd->title);
-        printf("  ISBN: %s\n", bd->isbn);
-        printf("  Amount: %i\n", bd->amount);
-        for(int i = 0; (bd->author)[i] != NULL; i++) {
-            printf("  Author %i: %s\n", i+1, (bd->author)[i]);
+        printf("  Titel: %s\n", books[curPos]->title);
+        printf("  ISBN: %s\n", books[curPos]->isbn);
+        printf("  Amount: %i\n", books[curPos]->amount);
+        for(int i = 0; (books[curPos]->author)[i] != NULL; i++) {
+            printf("  Author %i: %s\n", i+1, (books[curPos]->author)[i]);
         }
-        for(int i = 0; (bd->borrowers)[i] != NULL; i++) {
-            printf("  Borrower %i: %s\n", i+1, (bd->borrowers)[i]);
+        for(int i = 0; (books[curPos]->borrowers)[i] != NULL; i++) {
+            printf("  Borrower %i: %s\n", i+1, (books[curPos]->borrowers)[i]);
         }
-        printf("  SortOrder: %i\n", bd->sortOrder);
+        printf("  SortOrder: %i\n", books[curPos]->sortOrder);
         printf("\n");
-        curPos++;
     }
 }
