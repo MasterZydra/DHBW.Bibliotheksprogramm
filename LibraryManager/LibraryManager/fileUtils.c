@@ -126,3 +126,68 @@ void readNewLineEvent(bookData ***books, const char *line) {
     }
     (*books)[curPos]->sortOrder = curPos + 1;
 }
+
+/**
+ Insert a string into CSV string
+
+ @param src String to insert
+ @param dst CSV string
+ @param cursorPos Current cursor position
+ */
+void addToCSV(char* src, char* dst, int *cursorPos) {
+    int len = (int)strlen(src);
+    memcpy(&(dst[*cursorPos]), src, len);
+    *cursorPos = *cursorPos + len;
+}
+
+/**
+ Insert one character into CSV string
+
+ @param src Character to insert
+ @param dst CSV string
+ @param cursorPos Current cursor position
+ */
+void addCharToCSV(char src, char* dst, int *cursorPos) {
+    dst[*cursorPos] = src;
+    (*cursorPos)++;
+}
+
+/**
+ Saves content in struct into CSV
+
+ @param books Pointer to BookData array
+ @return Pointer to Memory with CSV string
+ */
+char *bookDataToCSV(bookData **books) {
+    char* csv = malloc(sizeof(char) * 999);
+    int cursorPos = 0;
+    for (int curPos = 0; books[curPos] != NULL; curPos++) {
+        // ISBN
+        addToCSV(books[curPos]->isbn, csv, &cursorPos);
+        addCharToCSV('|', csv, &cursorPos);
+        // Title
+        addToCSV(books[curPos]->title, csv, &cursorPos);
+        addCharToCSV('|', csv, &cursorPos);
+        // Author
+        for (int i = 0; (books[curPos]->author)[i] != NULL; i++) {
+            addToCSV((books[curPos]->author)[i], csv, &cursorPos);
+            addCharToCSV(';', csv, &cursorPos);
+        }
+        addCharToCSV('|', csv, &cursorPos);
+        // Amount - Convert int to char*
+        char *amount = malloc(sizeof(char) * 5);
+        sprintf(amount, "%d", books[curPos]->amount);
+        addToCSV(amount, csv, &cursorPos);
+        free(amount);
+        addCharToCSV('|', csv, &cursorPos);
+        // Borrower
+        for (int i = 0; (books[curPos]->borrowers)[i] != NULL; i++) {
+            addToCSV((books[curPos]->borrowers)[i], csv, &cursorPos);
+            addCharToCSV(';', csv, &cursorPos);
+        }
+        // Linebreak
+        addCharToCSV('\n', csv, &cursorPos);
+    }
+    addCharToCSV('\0', csv, &cursorPos);
+    return csv;
+}
