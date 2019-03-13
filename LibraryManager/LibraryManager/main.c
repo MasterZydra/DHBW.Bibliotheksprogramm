@@ -27,9 +27,9 @@ void getSubList(char **dataList, const char *dataLine) {
     char delimiter[] = ";";
     char *sub;
     char curDataLine[strlen(dataLine)];
-    
+
     strcpy(curDataLine, dataLine);
-    
+
     // Init and create first section
     sub = strtok(curDataLine, delimiter);
     int cnt = 0;
@@ -41,7 +41,7 @@ void getSubList(char **dataList, const char *dataLine) {
             dataList = realloc(dataList, sizeof(char**) * (cnt + 1));
         }
         dataList[cnt] = allocMem(sub, (int)strlen(sub));
-        
+
         printf("Sub-Item: %s\n",dataList[cnt]);
         // Create next section
         sub = strtok(NULL, delimiter);
@@ -53,9 +53,9 @@ void readNewLineEvent(bookData **books, const char *line) {
     char delimiter[] = "|";
     char *sub;
     char curLine[strlen(line)];
-    
+
     dataCol dc = dcISBN;
-    
+
     strcpy(curLine, line);
     // Init and create first section
     sub = strtok(curLine, delimiter);
@@ -91,28 +91,28 @@ void readNewLineEvent(bookData **books, const char *line) {
 }
 
 int main(int argc, const char * argv[]) {
-    bookData **data = calloc(1, sizeof(bookData**));
+//    bookData **data = calloc(1, sizeof(bookData**));
 //    writeFile("./lib.bbd", "abch?\nHallo wie geht es dir?");
-    readFile(data, "./lib.bd", readNewLineEvent);
-    return 0;
-    
-    freeBookData(data);
-    
+//    readFile(data, "./lib.bd", readNewLineEvent);
+//    return 0;
+
+//    freeBookData(data);
+
     //freeBookData(data);
 //    printf("\n");
 //    return 0;
-    
+
 //    char a = getchar();
 //    if (a == 10) printf("is 10\n");
 //    if (a == '\n') printf("is /n\n");
       //  return 0;
-    
-    
+
+    searchListMenu();
    // mainMenu();
     return 0;
-    
+
     // Ideen:
     // Einstellungen
     //   - Mehrsprachigkeit
-    //   - 
+    //   -
 }
