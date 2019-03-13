@@ -19,17 +19,18 @@
 #include <stdlib.h>
 
 int main(int argc, const char * argv[]) {
+    // Allocate memory for bookData array
     bookData **data = calloc(1, sizeof(bookData**));
+    // Read content from file
     readFile(&data, "./lib.bd", readNewLineEvent);
+    // Print content from data struct to console
     printBookData(data);
+    // Test to write data
+    char *bookDataCSV = bookDataToCSV(data)
+    writeFile("./test.txt", bookDataCSV);
+    // Free allocated memory
     freeBookData(&data);
     return 0;
-//    writeFile("./lib.bbd", "abch?\nHallo wie geht es dir?");
-//    freeBookData(data);
-    
-    //freeBookData(data);
-//    printf("\n");
-//    return 0;
     
 //    char a = getchar();
 //    if (a == 10) printf("is 10\n");
