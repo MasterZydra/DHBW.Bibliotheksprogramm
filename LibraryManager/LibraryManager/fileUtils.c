@@ -80,8 +80,7 @@ void readNewLineEvent(bookData ***books, const char *line) {
     char delimiter[] = "|";
     char *sub = strtok(curLine, delimiter);
     // Find last filled book struct
-    for (bookData *bd = **books; bd != NULL; bd = (*books)[curPos])
-        curPos++;
+    for (curPos = 0; (*books)[curPos] != NULL; curPos++);
     // Increase size of book array
     bookData **oldPointer = *books;
     *books = (bookData **)calloc(curPos + 2, sizeof(bookData*));
