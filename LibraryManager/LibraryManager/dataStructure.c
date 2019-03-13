@@ -13,10 +13,10 @@
 
  @param charPP Storage to free
  */
-void freeSubBookData(char **charPP) {
-    for (int i=0; charPP[i] != NULL; i++)
-        free(charPP[i]);
-    free(charPP);
+void freeSubBookData(char ***charPP) {
+    for (int i=0; (*charPP)[i] != NULL; i++)
+        free((*charPP)[i]);
+    free(*charPP);
 }
 
 /**
@@ -24,14 +24,15 @@ void freeSubBookData(char **charPP) {
 
  @param bds Pointer to array of book data
  */
-void freeBookData(bookData **bds) {
-    for (bookData *bd = bds[0]; bd != NULL; bd++) {
-        freeSubBookData(bd->author);
-        freeSubBookData(bd->borrowers);
-        free(bd->isbn);
-        free(bd->title);
-        free(bd);
+void freeBookData(bookData ***bds) {
+    for (int i = 0; (*bds)[i] != NULL; i++){
+        freeSubBookData(&(*bds)[i]->author);
+        freeSubBookData(&(*bds)[i]->borrowers);
+        free((*bds)[i]->isbn);
+        free((*bds)[i]->title);
+        free((*bds)[i]);
     }
+    free(*bds);
 }
 
 /**
@@ -85,21 +86,16 @@ void getSubList(char ***dataList, char *dataLine) {
 void printBookData(bookData **books) {
     clear_screen();
     int curPos = 0;
-    int i;
     for (bookData *bd = *books; bd != NULL; bd = books[curPos]) {
         printf("Book %i\n", curPos + 1);
         printf("  Titel: %s\n", bd->title);
         printf("  ISBN: %s\n", bd->isbn);
         printf("  Amount: %i\n", bd->amount);
-        i = 0;
-        for(char *c = *(bd->author); c != NULL && c != 0; c = bd->author[i]) {
-            printf("  Author %i: %s\n", i+1, c);
-            i++;
+        for(int i = 0; (bd->author)[i] != NULL; i++) {
+            printf("  Author %i: %s\n", i+1, (bd->author)[i]);
         }
-        i = 0;
-        for(char *c = *(bd->borrowers); c != NULL && c != 0; c = bd->borrowers[i]) {
-            printf("  Borrower %i: %s\n", i+1, c);
-            i++;
+        for(int i = 0; (bd->borrowers)[i] != NULL; i++) {
+            printf("  Borrower %i: %s\n", i+1, (bd->borrowers)[i]);
         }
         printf("  SortOrder: %i\n", bd->sortOrder);
         printf("\n");
