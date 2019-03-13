@@ -20,8 +20,4 @@ void searchMenu(bool);
 
 int searchMenuText(bool, searchCol);
 
-int searchListMenu(void);
-
-int selectedBookMenu(bookData*)
-
 #endif /* programlogic_h */

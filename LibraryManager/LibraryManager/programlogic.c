@@ -14,19 +14,19 @@
 int mainMenu() {
     char input = ' ';
     bool manageMode = false;
-
+    
     while (true) {
         printMainMenu(manageMode);
-
+        
         terminalInput("%c", &input);
-
+        
         switch (input) {
             case '0': return 0;
             case '1':
                 // Search book
                 searchMenu(manageMode);
                 break;
-
+                
             default:
                 break;
         }
@@ -38,9 +38,9 @@ void searchMenu(bool manageMode) {
     char input = ' ';
     while (true) {
         printSearchMenu();
-
+        
         terminalInput("%c", &input);
-
+        
         switch (input) {
             case '0': return;
             case '1':
@@ -76,61 +76,6 @@ int searchMenuText(bool manageMode, searchCol sc) {
     terminalInput("%s", &input);
     if (strcmp(input, "0") == 0) return 1;
     // search ...
-
-    return 0;
-}
-
-/**
- List Menu Logic,
-
-
- @param listData whole available sorted Booklist
- */
-
-int searchListMenu(**listData) {
-    char input = ' ';
-    bool manageMode = false;
-
-    while (true) {
-        printListMenu(&Test);
-
-        terminalInput("%c", &input);
-
-        switch (input) {
-            case '0': return 0;
-            case '1': selectedBookMenu(listData[0]);
-            case '2': selectedBookMenu(listData[1]);
-            case '3': selectedBookMenu(listData[2]);
-            case '4': selectedBookMenu(listData[3]);
-            case '5': selectedBookMenu(listData[4]);
-            case '6': selectedBookMenu(listData[5]);
-            case '7': selectedBookMenu(listData[6]);
-            case '8': selectedBookMenu(listData[7]);
-            case '9': selectedBookMenu(listData[8]);
-
-            default:
-                break;
-        }
-    }
-    return 0;
-}
-
-int selectedBookMenu(bookData *selectedBook) {
-    char input = ' ';
-    bool manageMode = false;
-
-    while (true) {
-        printSelectedBookData(selectedBook);
-
-        terminalInput("%c", &input);
-
-        switch (input) {
-            case '0': return 0;
-
-
-            default:
-                break;
-        }
-    }
+    
     return 0;
 }

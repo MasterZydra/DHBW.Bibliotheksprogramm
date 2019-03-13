@@ -19,10 +19,7 @@ void printSearchMenu(void);
 
 void printSearchMenuText(searchCol);
 
-void printListMenu(bookData**);
-
-void printSelectedBookData (bookData*);
-
+void printListMenu(void);
 
 #define TITLE() {\
 printf("~~~~~~~~~~~~~~~~~~~~~\n");\
@@ -75,18 +72,8 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define LIST_HEADLINE() {\
-    printf("i|Titel 25                 |Author 30                     |ISBN 13      |Anzahl 10 |\n");\
-    printf("-+-------------------------+------------------------------+-------------+----------+\n");\
-}
-
-#define LIST_MENU() {\
-    printf("Buch auswählen über den Index i.\n\
-    printf("Bitte passendes i eingeben.\n");\
-}
-
-#define SELECTEDBOOK_MENU() {\
-    printf("1 Ausleihen\n\
-    printf("2 Zurück geben\n");\
+    printf(" |Titel 25                 |Author 25                |ISBN 13      |Anzahl 10 |\n");\
+    printf("-+-------------------------+-------------------------+-------------+----------+\n");\
 }
 
 #endif /* menus_h */
