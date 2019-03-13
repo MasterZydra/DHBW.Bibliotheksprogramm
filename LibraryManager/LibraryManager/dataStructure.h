@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "terminalUtils.h"
+
 typedef struct {
     char *isbn;
     char *title;
@@ -29,5 +31,7 @@ void freeBookData(bookData **);
 char *allocMem(const char *, int);
 
 void getSubList(char ***, char *);
+
+void printBookData(bookData **books);
 
 #endif /* dataStructure_h */

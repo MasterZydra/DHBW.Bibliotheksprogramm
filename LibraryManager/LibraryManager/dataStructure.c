@@ -76,3 +76,33 @@ void getSubList(char ***dataList, char *dataLine) {
         cnt++;
     }
 }
+
+/**
+ Print data in bookData pointer pointer
+
+ @param books BookData pointer pointer
+ */
+void printBookData(bookData **books) {
+    clear_screen();
+    int curPos = 0;
+    int i;
+    for (bookData *bd = *books; bd != NULL; bd = books[curPos]) {
+        printf("Book %i\n", curPos + 1);
+        printf("  Titel: %s\n", bd->title);
+        printf("  ISBN: %s\n", bd->isbn);
+        printf("  Amount: %i\n", bd->amount);
+        i = 0;
+        for(char *c = *(bd->author); c != NULL && c != 0; c = bd->author[i]) {
+            printf("  Author %i: %s\n", i+1, c);
+            i++;
+        }
+        i = 0;
+        for(char *c = *(bd->borrowers); c != NULL && c != 0; c = bd->borrowers[i]) {
+            printf("  Borrower %i: %s\n", i+1, c);
+            i++;
+        }
+        printf("  SortOrder: %i\n", bd->sortOrder);
+        printf("\n");
+        curPos++;
+    }
+}
