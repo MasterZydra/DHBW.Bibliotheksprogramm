@@ -11,7 +11,9 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+
 #include "searchUtils.h"
+#include "dataStructure.h"
 
 void printMainMenu(bool);
 
@@ -80,12 +82,12 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define LIST_MENU() {\
-    printf("Buch auswählen über den Index i.\n\
+    printf("Buch auswählen über den Index i.\n");\
     printf("Bitte passendes i eingeben.\n");\
 }
 
 #define SELECTEDBOOK_MENU() {\
-    printf("1 Ausleihen\n\
+    printf("1 Ausleihen\n");\
     printf("2 Zurück geben\n");\
 }
 

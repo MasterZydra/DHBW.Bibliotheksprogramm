@@ -87,26 +87,26 @@ int searchMenuText(bool manageMode, searchCol sc) {
  @param listData
  */
 
-int searchListMenu(**listData) {
+int searchListMenu(bookData **listData) {
     char input = ' ';
     bool manageMode = false;
 
     while (true) {
-        printListMenu(&listData);
+        printListMenu(listData);
 
         terminalInput("%c", &input);
 
         switch (input) {
             case '0': return 0;
-            case '1': selectedBookMenu(&listData[0]);
-            case '2': selectedBookMenu(&listData[1]);
-            case '3': selectedBookMenu(&listData[2]);
-            case '4': selectedBookMenu(&listData[3]);
-            case '5': selectedBookMenu(&listData[4]);
-            case '6': selectedBookMenu(&listData[5]);
-            case '7': selectedBookMenu(&listData[6]);
-            case '8': selectedBookMenu(&listData[7]);
-            case '9': selectedBookMenu(&listData[8]);
+            case '1': selectedBookMenu(listData[0]);
+            case '2': selectedBookMenu(listData[1]);
+            case '3': selectedBookMenu(listData[2]);
+            case '4': selectedBookMenu(listData[3]);
+            case '5': selectedBookMenu(listData[4]);
+            case '6': selectedBookMenu(listData[5]);
+            case '7': selectedBookMenu(listData[6]);
+            case '8': selectedBookMenu(listData[7]);
+            case '9': selectedBookMenu(listData[8]);
 
             default:
                 break;

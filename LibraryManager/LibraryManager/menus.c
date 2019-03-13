@@ -91,19 +91,19 @@ void printListMenu(bookData **listData)
     TITLE();
     LIST_HEADLINE();
 
-    for (int i=0,i<=9&&listData[i]!=NULL,i++)
+    for (int i=0;i<=9&&listData[i]!=NULL;i++)
     {
-        print("%d|",i+1)
-        printf("%-25s|",listData[i].title);
+        printf("%d|",i+1);
+        printf("%-25s|",listData[i]->title);
 
-        printf("%-10s",listData[i].author[0]);
-        for (int j=1,j <=listData[i].author[sizeof(listData[i].author)/siszeof(char*)-1]&&j<=3,j++)
+        printf("%-10s",listData[i]->author[0]);
+        for (int j=1;j <=listData[i]->author[sizeof(listData[i]->author)/sizeof(char*)-1]&&j<=3;j++)
         {
-            printf(", %-10s",listData[i].author[j]);
+            printf(", %-10s",listData[i]->author[j]);
         }
         printf("|");
-        printf("%s|",listData[i].isbn);
-        printf("%-10d|",listData[i].bookAmount);
+        printf("%s|",listData[i]->isbn);
+        printf("%-10d|",listData[i]->amount);
     }
     BACK();
     MENU_FINISHLINE();
@@ -116,22 +116,22 @@ void printSelectedBookData (bookData *selectedBook)
     TITLE();
 
 
-    printf("Titel:             %s\n",selectedBook.title);
-    printf("Author:            %s",selectedBook.author[0]);
+    printf("Titel:             %s\n",selectedBook->title);
+    printf("Author:            %s",selectedBook->author[0]);
 
-    for (int i=1,i<=(sizeof(selectedBook.author)/siszeof(char*))-1,i++)
+    for (int i=1;i<=(sizeof(selectedBook->author)/sizeof(char*))-1;i++)
          {
-             printf(", %s",selectedBook.author[i];
+             printf(", %s",selectedBook->author[i]);
          }
     printf("\n");
 
-    printf("ISBN:              %s\n",selectedBook.isbn);
-    printf("Verfügbare Bücher: %d\n",selectedBook.amount);
-    printf("Ausleiher:         %s",selectedBook.borrowers[0]);
+    printf("ISBN:              %s\n",selectedBook->isbn);
+    printf("Verfügbare Bücher: %d\n",selectedBook->amount);
+    printf("Ausleiher:         %s",selectedBook->borrowers[0]);
 
-    for (int j=1,i<=sizeof(selectedBook.borrowers)/siszeof(char*)-1,j++)
+    for (int j=1;j<=sizeof(selectedBook->borrowers)/sizeof(char*)-1;j++)
          {
-             printf(", %s",selectedBook.borrowers[j];
+             printf(", %s",selectedBook->borrowers[j]);
          }
     printf("\n");
     BACK();

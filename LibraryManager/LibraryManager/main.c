@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
     // Print content from data struct to console
     printBookData(data);
     // Test to write data
-    char *bookDataCSV = bookDataToCSV(data)
+    char *bookDataCSV = bookDataToCSV(data);
     writeFile("./test.txt", bookDataCSV);
     // Free allocated memory
     freeBookData(&data);
