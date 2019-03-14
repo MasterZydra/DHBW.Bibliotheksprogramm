@@ -9,9 +9,10 @@
 #include "programlogic.h"
 #include "menus.h"
 
-
-
-int mainMenu() {
+/**
+ Logic and output for main menu
+ */
+void mainMenu() {
     char input = ' ';
     bool manageMode = false;
 
@@ -21,7 +22,7 @@ int mainMenu() {
         terminalInput("%c", &input);
 
         switch (input) {
-            case '0': return 0;
+            case '0': return;
             case '1':
                 // Search book
                 searchMenu(manageMode);
@@ -31,9 +32,14 @@ int mainMenu() {
                 break;
         }
     }
-    return 0;
+    return;
 }
 
+/**
+ Menu for searching books
+
+ @param manageMode User is logged in
+ */
 void searchMenu(bool manageMode) {
     char input = ' ';
     while (true) {
@@ -70,6 +76,13 @@ void searchMenu(bool manageMode) {
     }
 }
 
+/**
+ Menu for input of search text
+
+ @param manageMode User is logged in
+ @param sc Columns in which will be searched in
+ @return 0 = Ok, 1 = Break
+ */
 int searchMenuText(bool manageMode, searchCol sc) {
     char input[100];
     printSearchMenuText(sc);
@@ -81,13 +94,12 @@ int searchMenuText(bool manageMode, searchCol sc) {
 }
 
 /**
- List Menu Logic,
- after printing the incoming listData you can select a book from the List for further editing.
+ List books and let user select one and show more details
 
- @param listData
+ @param listData BookData array
+ @return 0 = Ok
  */
-
-int searchListMenu(bookData **listData) {
+int listMenu(bookData **listData) {
     char input = ' ';
 
     while (true) {
@@ -95,26 +107,18 @@ int searchListMenu(bookData **listData) {
 
         terminalInput("%c", &input);
 
-        switch (input) {
-            case '0': return 0;
-            case '1': selectedBookMenu(listData[0]);
-            case '2': selectedBookMenu(listData[1]);
-            case '3': selectedBookMenu(listData[2]);
-            case '4': selectedBookMenu(listData[3]);
-            case '5': selectedBookMenu(listData[4]);
-            case '6': selectedBookMenu(listData[5]);
-            case '7': selectedBookMenu(listData[6]);
-            case '8': selectedBookMenu(listData[7]);
-            case '9': selectedBookMenu(listData[8]);
-
-            default:
-                break;
-        }
+        if (input == '0') return 0;
+        if (input >= '1' && input <= '9') selectedBookMenu(listData[input - '1']);
     }
     return 0;
 }
 
+/**
+ Show details of one book
 
+ @param selectedBook BookData array
+ @return 0 = Ok
+ */
 int selectedBookMenu(bookData *selectedBook) {
     char input = ' ';
 
