@@ -118,10 +118,7 @@ void getSubList(char ***dataList, char *dataLine) {
         }
         else {
             // Allocate new memory area and copy content into it
-            char **old = *dataList;
-            *dataList = calloc(cnt + 2, sizeof(char**));
-            memcpy(*dataList, old, sizeof(char**) * (cnt + 1));
-            free(old);
+            *dataList = (char **)reallocMemCalloc(*dataList, cnt + 2, sizeof(char**), cnt + 1);
         }
         (*dataList)[cnt] = allocMem(sub, (int)strlen(sub));
         // Create next section
@@ -129,3 +126,21 @@ void getSubList(char ***dataList, char *dataLine) {
         cnt++;
     }
 }
+
+/**
+ Allocate memory of given size, copy data from old memory
+ area into it and free old memory area.
+
+ @param oldPointer Pointer to old data
+ @param num Number of new elements
+ @param sizeOfDataType Size of one element
+ @param oldNum Number of old elements
+ @return Pointer to new memory area
+ */
+void *reallocMemCalloc(void *oldPointer, int num, int sizeOfDataType, int oldNum) {
+    void *newPointer = calloc(num, sizeOfDataType);
+    memcpy(newPointer, oldPointer, sizeOfDataType * oldNum);
+    free(oldPointer);
+    return newPointer;
+}
+

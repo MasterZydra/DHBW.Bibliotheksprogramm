@@ -33,4 +33,6 @@ void freeSubBookData(char ***);
 
 void getSubList(char ***, char *);
 
+void *reallocMemCalloc(void *, int, int, int);
+
 #endif /* utils_h */

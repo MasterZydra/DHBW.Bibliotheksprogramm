@@ -82,10 +82,7 @@ void readNewLineEvent(bookData ***books, const char *line) {
     // Find last filled book struct
     for (curPos = 0; (*books)[curPos] != NULL; curPos++);
     // Increase size of book array
-    bookData **oldPointer = *books;
-    *books = (bookData **)calloc(curPos + 2, sizeof(bookData*));
-    memcpy(*books, oldPointer, sizeof(bookData*) * (curPos + 1));
-    free(oldPointer);
+    *books = (bookData **)reallocMemCalloc(*books, curPos + 2, sizeof(bookData*), curPos + 1);
     // Allocate space for one book
     (*books)[curPos] = malloc(sizeof(bookData));
     // Save data in struct
