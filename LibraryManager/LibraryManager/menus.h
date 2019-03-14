@@ -80,7 +80,7 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define LIST_HEADLINE() {\
-    printf(" i | Titel                      | Author                       | ISBN          | Anz |\n");\
+    printf(" i | Titel                      | Autor                        | ISBN          | Anz |\n");\
     printf("---+----------------------------+------------------------------+---------------+-----+\n");\
 }
 

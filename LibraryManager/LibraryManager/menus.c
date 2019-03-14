@@ -116,28 +116,32 @@ void printListMenu(bookData **listData)
     LIST_MENU();
 }
 
-void printSelectedBookData (bookData *selectedBook)
+/**
+ Print data of one book
+
+ @param selectedBook Pointer to bookData
+ */
+void printSelectedBookData(bookData *selectedBook)
 {
     clear_screen();
     TITLE();
-
-
+    // Title
     printf("Titel:             %s\n",selectedBook->title);
-    printf("Author:            %s",selectedBook->author[0]);
-
+    // All authors
+    printf("Autor:             %s",selectedBook->author[0]);
     for (int i = 1; selectedBook->author[i] != NULL; i++)
          printf(", %s",selectedBook->author[i]);
     printf("\n");
-
+    // ISBN
     printf("ISBN:              %s\n",selectedBook->isbn);
+    // Amount
     printf("Verfügbare Bücher: %d\n",selectedBook->amount);
+    // All borrowers
     printf("Ausleiher:         %s",selectedBook->borrowers[0]);
-
     for (int i = 1; selectedBook->borrowers[i] != NULL; i++)
         printf(", %s", selectedBook->borrowers[i]);
-    printf("\n");
+    printf("\n\n");
+    
     BACK();
     MENU_FINISHLINE();
 }
-
-
