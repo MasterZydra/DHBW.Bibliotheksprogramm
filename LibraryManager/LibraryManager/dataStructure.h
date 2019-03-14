@@ -38,4 +38,8 @@ int countBooks(bookData **books);
 
 char *bookDataToCSV(bookData **);
 
+int bookCompare(const void *, const void *);
+
+void sortBooks(bookData **books);
+
 #endif /* dataStructure_h */

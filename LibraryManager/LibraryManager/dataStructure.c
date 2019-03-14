@@ -152,3 +152,25 @@ char *bookDataToCSV(bookData **books) {
     addCharToPos('\0', csv, &cursorPos);
     return csv;
 }
+
+/**
+ Compare two books by sortOrder
+ 
+ @param p1 Pointer to book
+ @param p2 Pointer to book
+ @return 1, -1 or 0
+ */
+int bookCompare(const void *p1, const void *p2) {
+    if (((bookData *)p1)->sortOrder < ((bookData *)p2)->sortOrder) return 1;
+    if (((bookData *)p1)->sortOrder > ((bookData *)p2)->sortOrder) return -1;
+    return 0;
+}
+
+/**
+ Sort bookData array
+ 
+ @param books Pointer to bookData array
+ */
+void sortBooks(bookData **books) {
+    qsort(&(books[0]), countBooks(books), sizeof(bookData*), bookCompare);
+}
