@@ -15,6 +15,7 @@
 #include <limits.h>
 
 #include "dataStructure.h"
+#include "utils.h"
 
 typedef enum {
     scAll, scISBN, scTitle, scAuthor, scBorrower

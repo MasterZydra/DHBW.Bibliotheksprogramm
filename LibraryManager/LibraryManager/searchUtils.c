@@ -14,7 +14,7 @@ int determineSearchMatch(char *data, char *searchText) {
     // Return a negative number if searchtext is in data string
     // Else return a positiv number
     int lDst = (double)levenshtein(data, searchText)/strlen(data)*100;
-    if (strstr(data, searchText)) return -1 * lDst;
+    if (strstr(data, searchText)) return INT_MIN + lDst;
     else return lDst;
 }
 
@@ -23,12 +23,14 @@ void test(char *p0, bookData *book) {
 }
 
 bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
-    bookData **result = calloc(2, sizeof(bookData**));
+    bookData **result = calloc(1, sizeof(bookData**));
+    int resCnt = 0;
     int searchMatch;
     
     
     for (int curPos = 0; allBooks[curPos] != NULL; curPos++) {
         allBooks[curPos]->sortOrder = INT_MAX;
+        printf("Val: %i\n", allBooks[curPos]->sortOrder);
         printf("new book\n");
         switch (sc) {
             case scAll:
@@ -91,6 +93,14 @@ bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
             default:
                 perror("Search criteria is not implemented!");
                 break;
+        }
+        if (allBooks[curPos]->sortOrder < 81) {
+            result[resCnt] = allBooks[curPos];
+            resCnt++;
+            result = reallocMemCalloc(result, resCnt + 1, sizeof(bookData *), resCnt);
+        }
+        else {
+            printf("No match: %s\n", allBooks[curPos]->title);
         }
     }
     return result;
