@@ -26,4 +26,11 @@ void addStrAtPos(char*, char*, int *);
 
 void addCharToPos(char, char*, int *);
 
+// Functions for memory handling
+char *allocMem(const char *, int);
+
+void freeSubBookData(char ***);
+
+void getSubList(char ***, char *);
+
 #endif /* utils_h */

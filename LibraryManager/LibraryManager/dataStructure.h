@@ -24,13 +24,7 @@ typedef struct {
     int sortOrder;
 } bookData;
 
-void freeSubBookData(char ***);
-
 void freeBookData(bookData ***);
-
-char *allocMem(const char *, int);
-
-void getSubList(char ***, char *);
 
 void printBookData(bookData **);
 
