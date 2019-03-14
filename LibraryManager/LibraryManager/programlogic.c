@@ -12,7 +12,7 @@
 /**
  Logic and output for main menu
  */
-void mainMenu() {
+void mainMenu(bookData ***books) {
     char input = ' ';
     bool manageMode = false;
 
@@ -25,7 +25,7 @@ void mainMenu() {
             case '0': return;
             case '1':
                 // Search book
-                searchMenu(manageMode);
+                searchMenu(books, manageMode);
                 break;
 
             default:
@@ -40,7 +40,7 @@ void mainMenu() {
 
  @param manageMode User is logged in
  */
-void searchMenu(bool manageMode) {
+void searchMenu(bookData ***books, bool manageMode) {
     char input = ' ';
     while (true) {
         printSearchMenu();
@@ -51,22 +51,22 @@ void searchMenu(bool manageMode) {
             case '0': return;
             case '1':
                 // Search in all
-                if (searchMenuText(manageMode, scAll) == 0)
+                if (searchMenuText(books, manageMode, scAll) == 0)
                     return;
                 break;
             case '2':
                 // Search in ISBN
-                if (searchMenuText(manageMode, scISBN) == 0)
+                if (searchMenuText(books, manageMode, scISBN) == 0)
                     return;
                 break;
             case '3':
                 // Search in Title
-                if (searchMenuText(manageMode, scTitle) == 0)
+                if (searchMenuText(books, manageMode, scTitle) == 0)
                     return;
                 break;
             case '4':
                 // Search in Author
-                if (searchMenuText(manageMode, scAuthor) == 0)
+                if (searchMenuText(books, manageMode, scAuthor) == 0)
                     return;
                 break;
 
@@ -83,13 +83,25 @@ void searchMenu(bool manageMode) {
  @param sc Columns in which will be searched in
  @return 0 = Ok, 1 = Break
  */
-int searchMenuText(bool manageMode, searchCol sc) {
-    char input[100];
+int searchMenuText(bookData ***books, bool manageMode, searchCol sc) {
+    char *input = (char *)calloc(100, sizeof(char));
+    
     printSearchMenuText(sc);
-    terminalInput("%s", &input);
-    if (strcmp(input, "0") == 0) return 1;
-    // search ...
+    terminalInput("%s", input);
 
+    if (strcmp(input, "0") == 0) {
+        free(input);
+        return 1;
+    }
+    
+    searchBooks(sc, *books, input);
+    free(input);
+    sortBooks(*books);
+    
+    listMenu(*books);
+    
+    // search ...
+    
     return 0;
 }
 
