@@ -53,23 +53,18 @@ void printSearchMenuText(searchCol sc) {
         case scAll:
             SEARCHMENU_TEXT("Suchtext");
             break;
-
         case scISBN:
             SEARCHMENU_TEXT("ISBN");
             break;
-
         case scTitle:
             SEARCHMENU_TEXT("Titel");
             break;
-
         case scAuthor:
             SEARCHMENU_TEXT("Autor");
             break;
-
         case scBorrower:
             SEARCHMENU_TEXT("Ausleiher");
             break;
-
         default:
             perror("Search criteria is not implemented!");
             break;
@@ -114,6 +109,7 @@ void printListMenu(bookData **listData)
     BACK();
     MENU_FINISHLINE();
     LIST_MENU();
+    MENU_INPUT();
 }
 
 /**
@@ -144,4 +140,5 @@ void printSelectedBookData(bookData *selectedBook)
     
     BACK();
     MENU_FINISHLINE();
+    MENU_INPUT();
 }
