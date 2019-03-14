@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "terminalUtils.h"
+#include "utils.h"
 
 typedef struct {
     char *isbn;
@@ -35,5 +35,7 @@ void getSubList(char ***, char *);
 void printBookData(bookData **);
 
 int countBooks(bookData **books);
+
+char *bookDataToCSV(bookData **);
 
 #endif /* dataStructure_h */

@@ -15,7 +15,7 @@
 
 #include "searchUtils.h"
 #include "dataStructure.h"
-#include "terminalUtils.h"
+#include "utils.h"
 #include "fileUtils.h"
 
 void printMainMenu(bool);

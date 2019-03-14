@@ -24,10 +24,4 @@ void writeFile(char *, const char *);
 
 void readNewLineEvent(bookData ***, const char *);
 
-void addStrAtPos(char*, char*, int *);
-
-void addCharToPos(char, char*, int *);
-
-char *bookDataToCSV(bookData **);
-
 #endif /* fileUtils_h */

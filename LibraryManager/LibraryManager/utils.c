@@ -1,19 +1,17 @@
 //
-//  terminalUtils.c
+//  utils.c
 //  LibraryManager
 //
-//  Created by David Hein & Felix Hieser on 26.01.19.
-//  Copyright © 2019 David Hein & Felix Hieser. All rights reserved.
+//  Created by David Hein & Felix Hieser on 14.03.19.
+//  Copyright © 2019 David Hein & Fleix Hieser. All rights reserved.
 //
 
-#include "terminalUtils.h"
-
-#include <stdlib.h>
+#include "utils.h"
 
 /**
  Read input with given format and empty keyboard buffer afterwards.
  Use it like scanf().
-
+ 
  @param format Format of input
  @param ... List of all pointers of variables to fill
  @return Number of read parameters
@@ -51,4 +49,29 @@ void clear_screen()
 #ifdef __APPLE__
     system ("clear");
 #endif
+}
+
+/**
+ Insert a string into CSV string
+ 
+ @param src String to insert
+ @param dst CSV string
+ @param cursorPos Current cursor position
+ */
+void addStrAtPos(char* src, char* dst, int *cursorPos) {
+    int len = (int)strlen(src);
+    memcpy(&(dst[*cursorPos]), src, len);
+    *cursorPos = *cursorPos + len;
+}
+
+/**
+ Insert one character into CSV string
+ 
+ @param src Character to insert
+ @param dst CSV string
+ @param cursorPos Current cursor position
+ */
+void addCharToPos(char src, char* dst, int *cursorPos) {
+    dst[*cursorPos] = src;
+    (*cursorPos)++;
 }

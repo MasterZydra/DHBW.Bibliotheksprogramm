@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "terminalUtils.h"
+#include "utils.h"
 #include "searchUtils.h"
 #include "dataStructure.h"
 
