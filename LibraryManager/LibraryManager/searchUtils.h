@@ -11,6 +11,10 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#include "dataStructure.h"
 
 typedef enum {
     scAll, scISBN, scTitle, scAuthor, scBorrower
@@ -18,6 +22,8 @@ typedef enum {
 
 // Get minimum of 3 values
 #define MIN3(a, b, c) ((a) < (b) ? ((a) < (c) ? (a) : (c)) : ((b) < (c) ? (b) : (c)))
+
+bookData **searchBooks(searchCol, bookData **, char *);
 
 int levenshtein(const char *, const char *);
 

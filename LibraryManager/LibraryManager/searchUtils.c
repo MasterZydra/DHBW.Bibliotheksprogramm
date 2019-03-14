@@ -8,6 +8,95 @@
 
 #include "searchUtils.h"
 
+int determineSearchMatch(char *data, char *searchText) {
+    // Return INT_MIN if text is identical
+    if (strcmp(data, searchText) == 0) return INT_MIN;
+    // Return a negative number if searchtext is in data string
+    // Else return a positiv number
+    int lDst = (double)levenshtein(data, searchText)/strlen(data)*100;
+    if (strstr(data, searchText)) return -1 * lDst;
+    else return lDst;
+}
+
+void test(char *p0, bookData *book) {
+    printf("%s: %i\n", p0, book->sortOrder);
+}
+
+bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
+    bookData **result = calloc(2, sizeof(bookData**));
+    int searchMatch;
+    
+    
+    for (int curPos = 0; allBooks[curPos] != NULL; curPos++) {
+        allBooks[curPos]->sortOrder = INT_MAX;
+        printf("new book\n");
+        switch (sc) {
+            case scAll:
+                searchMatch = determineSearchMatch(allBooks[curPos]->isbn, searchText);
+                if (searchMatch < allBooks[curPos]->sortOrder) allBooks[curPos]->sortOrder = searchMatch;
+                test("All", allBooks[curPos]);
+                if (allBooks[curPos]->sortOrder == INT_MIN) break;
+                searchMatch = determineSearchMatch(allBooks[curPos]->title, searchText);
+                if (searchMatch < allBooks[curPos]->sortOrder) allBooks[curPos]->sortOrder = searchMatch;
+                test("All", allBooks[curPos]);
+                if (allBooks[curPos]->sortOrder == INT_MIN) break;
+                for(int i = 0; (allBooks[curPos]->author)[i] != NULL; i++) {
+                    searchMatch = determineSearchMatch((allBooks[curPos]->author)[i], searchText);
+                    if (searchMatch < allBooks[curPos]->sortOrder)
+                        allBooks[curPos]->sortOrder =  searchMatch;
+                    test("All", allBooks[curPos]);
+                    if (allBooks[curPos]->sortOrder == INT_MIN) break;
+                }
+//                for(int i = 0; (allBooks[curPos]->borrowers)[i] != NULL; i++) {
+//                    searchMatch = determineSearchMatch((allBooks[curPos]->borrowers)[i], searchText);
+//                    if (searchMatch < allBooks[curPos]->sortOrder)
+//                        allBooks[curPos]->sortOrder =  searchMatch;
+//                    test("All", allBooks[curPos]);
+//                    if (allBooks[curPos]->sortOrder == INT_MIN) break;
+//                }
+                
+                break;
+                
+            case scISBN:
+                allBooks[curPos]->sortOrder = determineSearchMatch(allBooks[curPos]->isbn, searchText);
+                test("ISBN", allBooks[curPos]);
+                
+                break;
+                
+            case scTitle:
+                allBooks[curPos]->sortOrder = determineSearchMatch(allBooks[curPos]->title, searchText);
+                test("Title", allBooks[curPos]);
+                break;
+                
+            case scAuthor:
+                for(int i = 0; (allBooks[curPos]->author)[i] != NULL; i++) {
+                    searchMatch = determineSearchMatch((allBooks[curPos]->author)[i], searchText);
+                    if (searchMatch < allBooks[curPos]->sortOrder)
+                        allBooks[curPos]->sortOrder =  searchMatch;
+                    test("Author", allBooks[curPos]);
+                    if (allBooks[curPos]->sortOrder == INT_MIN) break;
+                }
+                break;
+                
+//            case scBorrower:
+//                for(int i = 0; (allBooks[curPos]->borrowers)[i] != NULL; i++) {
+//                    searchMatch = determineSearchMatch((allBooks[curPos]->borrowers)[i], searchText);
+//                    if (searchMatch < allBooks[curPos]->sortOrder)
+//                        allBooks[curPos]->sortOrder =  searchMatch;
+//                    test("Borrower", allBooks[curPos]);
+//                    if (allBooks[curPos]->sortOrder == INT_MIN) break;
+//                }
+//                break;
+                
+            default:
+                perror("Search criteria is not implemented!");
+                break;
+        }
+    }
+    return result;
+}
+
+
 /**
  Process the Levenshtein distance. It is a string metric for measuring
  the difference between two sequences.
