@@ -93,15 +93,14 @@ int searchMenuText(bookData ***books, bool manageMode, searchCol sc) {
         free(input);
         return 1;
     }
-    
-    searchBooks(sc, *books, input);
+    // Search matches
+    bookData **results = searchBooks(sc, *books, input);
     free(input);
-    sortBooks(*books);
-    
-    listMenu(*books);
-    
-    // search ...
-    
+    // Sort books by sortOrder
+    sortBooks(results);
+    // Execute list menu which shows results
+    listMenu(results);
+    free(results);
     return 0;
 }
 
