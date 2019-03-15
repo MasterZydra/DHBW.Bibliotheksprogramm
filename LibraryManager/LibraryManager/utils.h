@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+#include <ctype.h>
 
 // Functions for managing the terminal
 int terminalInput(const char *, ...);
@@ -27,6 +28,8 @@ void addStrAtPos(char*, char*, int *);
 void addCharToPos(char, char*, int *);
 
 int countStrings(char **);
+
+void strToLower(char *, char *);
 
 // Functions for memory handling
 char *allocMem(const char *, int);

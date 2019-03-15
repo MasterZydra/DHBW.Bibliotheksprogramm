@@ -89,6 +89,17 @@ int countStrings(char **strArr) {
 }
 
 /**
+ Turns every character to lower
+
+ @param dst Destination char pointer
+ @param src Source char pointer
+ */
+void strToLower(char *dst, char *src) {
+    for (int i = 0; i <= strlen(src); i++)
+        dst[i] = tolower(src[i]);
+}
+
+/**
  Allocate memory and fill it with content
  
  @param data Pointer to text
