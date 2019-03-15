@@ -14,7 +14,7 @@
  */
 void mainMenu(bookData ***books) {
     char input = ' ';
-    bool manageMode = false;
+    bool manageMode = true;
 
     while (true) {
         printMainMenu(manageMode);
@@ -124,6 +124,11 @@ int listMenu(bookData **listData) {
     return 0;
 }
 
+
+
+
+
+
 /**
  Show details of one book
 
@@ -147,4 +152,23 @@ int selectedBookMenu(bookData *selectedBook) {
         }
     }
     return 0;
+}
+
+void addBook(bookData ***books) {
+    // Increase size of book array
+    int cnt = countBooks(*books);
+    *books = (bookData **)reallocMemCalloc(*books, cnt + 2, sizeof(bookData*), cnt);
+    // Allocate space for one book
+    (*books)[cnt] = malloc(sizeof(bookData));
+    
+    (*books)[cnt]->isbn = allocMem("12345678", strlen("12345678") + 1);
+    (*books)[cnt]->title = allocMem("test book", strlen("test book") + 1);
+    (*books)[cnt]->sortOrder = -1;
+    (*books)[cnt]->amount = 99;
+    char *author = allocMem("TestAuthor;", strlen("TestAuthor;") + 1);
+    char *borrower = allocMem("", strlen("") + 1);
+    getSubList(&(*books)[cnt]->author, author);
+    free(author);
+    getSubList(&(*books)[cnt]->borrowers, borrower);
+    free(borrower);
 }

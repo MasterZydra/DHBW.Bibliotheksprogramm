@@ -139,6 +139,7 @@ void printSelectedBookData(bookData *selectedBook)
     printf("\n\n");
     
     BACK();
+    SELECTEDBOOK_MENU();
     MENU_FINISHLINE();
     MENU_INPUT();
 }

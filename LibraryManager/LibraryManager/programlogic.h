@@ -26,4 +26,6 @@ int listMenu(bookData **);
 
 int selectedBookMenu(bookData *);
 
+void addBook(bookData ***);
+
 #endif /* programlogic_h */
