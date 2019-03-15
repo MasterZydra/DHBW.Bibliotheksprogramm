@@ -77,6 +77,18 @@ void addCharToPos(char src, char* dst, int *cursorPos) {
 }
 
 /**
+ Determine number of strings in array
+
+ @param strArr String array
+ @return Number of strings
+ */
+int countStrings(char **strArr) {
+    int cnt = 0;
+    for (cnt = 0; strArr[cnt] != NULL; cnt++);
+    return cnt;
+}
+
+/**
  Allocate memory and fill it with content
  
  @param data Pointer to text
@@ -149,3 +161,27 @@ void *reallocMemCalloc(void *oldPointer, int num, int sizeOfDataType, int oldNum
     return newPointer;
 }
 
+/**
+ Remove one string from a string array
+
+ @param stringArr Pointer to string array
+ @param delete Pointer to string to remove
+ */
+void removeSubstring(char ***stringArr, char *delete) {
+    // Allocate memory for new string array
+    char **newArray = (char **)calloc(countStrings(*stringArr), sizeof(char *));
+    // Iterate strings and save pointer to new array
+    // Except for the string to delete
+    int cnt = 0;
+    for (int curPos = 0; (*stringArr)[curPos] != NULL; curPos++) {
+        if ((*stringArr)[curPos] == delete)
+            free((*stringArr)[curPos]);
+        else {
+            newArray[cnt] = (*stringArr)[curPos];
+            cnt++;
+        }
+    }
+    // Free old memory area and return address
+    free(*stringArr);
+    *stringArr = newArray;
+}

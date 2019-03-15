@@ -26,6 +26,8 @@ void addStrAtPos(char*, char*, int *);
 
 void addCharToPos(char, char*, int *);
 
+int countStrings(char **);
+
 // Functions for memory handling
 char *allocMem(const char *, int);
 
@@ -34,5 +36,7 @@ void freeSubBookData(char ***);
 void getSubList(char ***, char *);
 
 void *reallocMemCalloc(void *, int, int, int);
+
+void removeSubstring(char ***, char *);
 
 #endif /* utils_h */
