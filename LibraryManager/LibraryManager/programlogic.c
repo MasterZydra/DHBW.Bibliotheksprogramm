@@ -143,6 +143,11 @@ int selectedBookMenu(bookData *selectedBook) {
             case '1':
                 // Borrow book
                 borrowBook(selectedBook);
+                break;
+            case '2':
+                // Return book
+                returnBook(selectedBook);
+                break;
             default:
                 break;
         }
@@ -181,15 +186,40 @@ void borrowBook(bookData *selectedBook) {
         printf("(i) Info:\n");
         printf("---------\n");
         printf(" Alle %d Exemplare sind ausgeliehen.\n\n", selectedBook->amount);
-        
         printf("Mit Enter fortfahren");
         getchar();
         return;
     }
     // Get name and add to bookData
     char name[100];
-    printf("Bitte Name eingeben: (Abbruch mit '0')\n");
+    printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
     terminalInput("%s", &name);
     if (strcmp(name, "0") == 0) return;
     addSubstring(&selectedBook->borrowers, name);
+}
+
+/**
+ Return a book
+
+ @param selectedBook Book to return
+ */
+void returnBook(bookData *selectedBook) {
+    char name[100];
+    printf("\n");
+    printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
+    terminalInput("%s", &name);
+    if (strcmp(name, "0") == 0) return;
+    
+    char *borrower = findSubstring(selectedBook->borrowers, name);
+    if (borrower != NULL) {
+        removeSubstring(&selectedBook->borrowers, borrower);
+    }
+    else {
+        printf("\n");
+        printf("(i) Info:\n");
+        printf("---------\n");
+        printf("Kein Ausleiher '%s' gefunden.\n\n", name);
+        printf("Mit Enter fortfahren");
+        getchar();
+    }
 }

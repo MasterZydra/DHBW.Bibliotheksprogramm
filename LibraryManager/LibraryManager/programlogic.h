@@ -30,4 +30,6 @@ void addBook(bookData ***);
 
 void borrowBook(bookData *);
 
+void returnBook(bookData *);
+
 #endif /* programlogic_h */
