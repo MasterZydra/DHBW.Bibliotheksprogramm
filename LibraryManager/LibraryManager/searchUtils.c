@@ -31,15 +31,28 @@ char *findSubstring(char **stringArr, char *search) {
  @return INT_MIN = Conformity, Neg number = Contains search text, Pos num = Similar
  */
 int determineSearchMatch(char *data, char *searchText) {
+    char mData[strlen(data) + 1];
+    char mSearchText[strlen(searchText) + 1];
+    // Turn strings to lower
+    strToLower(mData, data);
+    strToLower(mSearchText, searchText);
     // Return INT_MIN if text is identical
-    if (strcmp(data, searchText) == 0) return INT_MIN;
+    if (strcmp(mData, mSearchText) == 0) return INT_MIN;
     // Return a negative number if searchtext is in data string
     // Else return a positiv number
-    int lDst = (double)levenshtein(data, searchText)/strlen(data)*100;
-    if (strstr(data, searchText)) return INT_MIN + lDst;
+    int lDst = (double)levenshtein(mData, mSearchText)/strlen(mData)*100;
+    if (strstr(mData, mSearchText)) return INT_MIN + lDst;
     else return lDst;
 }
 
+/**
+ Function to search in all books
+
+ @param sc Columns in which will be searched
+ @param allBooks Pointer to book array
+ @param searchText Pointer to serach text
+ @return Pointer to book array which contains search results
+ */
 bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
     bookData **result = calloc(1, sizeof(bookData**));
     int resCnt = 0;
