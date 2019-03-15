@@ -112,6 +112,11 @@ void getSubList(char ***dataList, char *dataLine) {
     char *sub;
     // Init and create first section
     sub = strtok(dataLine, delimiter);
+    // Return null if there is no data in line
+    if (!sub) {
+        *dataList = calloc(1, sizeof(char**));
+        return;
+    }
     while (sub) {
         if (cnt == 0) {
             *dataList = calloc(2, sizeof(char**));
