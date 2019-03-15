@@ -18,7 +18,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-
 int main(int argc, const char * argv[]) {
     // Allocate memory for bookData array
     bookData **data = calloc(1, sizeof(bookData**));
@@ -30,7 +29,7 @@ int main(int argc, const char * argv[]) {
     char *bookDataCSV = bookDataToCSV(data);
     writeFile("./test.txt", bookDataCSV);
     // Free allocated memory
-    freeBookData(&data);
+    freeBookDatas(&data);
     return 0;
     
 //    char a = getchar();
