@@ -39,4 +39,6 @@ void *reallocMemCalloc(void *, int, int, int);
 
 void removeSubstring(char ***, char *);
 
+void addSubstring(char ***, char *);
+
 #endif /* utils_h */

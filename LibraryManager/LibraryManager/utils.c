@@ -137,7 +137,7 @@ void getSubList(char ***dataList, char *dataLine) {
             // Allocate new memory area and copy content into it
             *dataList = (char **)reallocMemCalloc(*dataList, cnt + 2, sizeof(char**), cnt + 1);
         }
-        (*dataList)[cnt] = allocMem(sub, (int)strlen(sub));
+        (*dataList)[cnt] = allocMem(sub, (int)strlen(sub) + 1);
         // Create next section
         sub = strtok(NULL, delimiter);
         cnt++;
@@ -184,4 +184,18 @@ void removeSubstring(char ***stringArr, char *delete) {
     // Free old memory area and return address
     free(*stringArr);
     *stringArr = newArray;
+}
+
+/**
+ Add one string to an string array
+
+ @param stringArr Pointer to string array
+ @param newString Pointer to string to add
+ */
+void addSubstring(char ***stringArr, char *newString) {
+    int cnt = countStrings(*stringArr);
+    // Reallocate memory for new string array and transfer data
+    *stringArr = (char **)reallocMemCalloc(*stringArr, cnt + 2, sizeof(char *), cnt);
+    // Add new string at end of list
+    (*stringArr)[cnt] = allocMem(newString, (int)strlen(newString) + 1);
 }
