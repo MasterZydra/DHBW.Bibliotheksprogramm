@@ -24,6 +24,8 @@ typedef enum {
 // Get minimum of 3 values
 #define MIN3(a, b, c) ((a) < (b) ? ((a) < (c) ? (a) : (c)) : ((b) < (c) ? (b) : (c)))
 
+char *findSubstring(char **, char *);
+
 bookData **searchBooks(searchCol, bookData **, char *);
 
 int levenshtein(const char *, const char *);

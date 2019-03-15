@@ -8,6 +8,21 @@
 
 #include "searchUtils.h"
 
+/**
+ Find a string in a string array
+
+ @param stringArr String array
+ @param search Searchtext
+ @return Pointer to string or NULL
+ */
+char *findSubstring(char **stringArr, char *search) {
+    char *result = NULL;
+    for (int curPos = 0; stringArr[curPos] != NULL; curPos++)
+        if (strcmp(stringArr[curPos], search) == 0)
+            return stringArr[curPos];
+    return result;
+}
+
 int determineSearchMatch(char *data, char *searchText) {
     // Return INT_MIN if text is identical
     if (strcmp(data, searchText) == 0) return INT_MIN;
@@ -16,10 +31,6 @@ int determineSearchMatch(char *data, char *searchText) {
     int lDst = (double)levenshtein(data, searchText)/strlen(data)*100;
     if (strstr(data, searchText)) return INT_MIN + lDst;
     else return lDst;
-}
-
-void test(char *p0, bookData *book) {
-    printf("%s: %i\n", p0, book->sortOrder);
 }
 
 bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
@@ -36,64 +47,36 @@ bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
             case scAll:
                 searchMatch = determineSearchMatch(allBooks[curPos]->isbn, searchText);
                 if (searchMatch < allBooks[curPos]->sortOrder) allBooks[curPos]->sortOrder = searchMatch;
-                test("All", allBooks[curPos]);
                 if (allBooks[curPos]->sortOrder == INT_MIN) break;
                 searchMatch = determineSearchMatch(allBooks[curPos]->title, searchText);
                 if (searchMatch < allBooks[curPos]->sortOrder) allBooks[curPos]->sortOrder = searchMatch;
-                test("All", allBooks[curPos]);
                 if (allBooks[curPos]->sortOrder == INT_MIN) break;
                 for(int i = 0; (allBooks[curPos]->author)[i] != NULL; i++) {
                     searchMatch = determineSearchMatch((allBooks[curPos]->author)[i], searchText);
                     if (searchMatch < allBooks[curPos]->sortOrder)
                         allBooks[curPos]->sortOrder =  searchMatch;
-                    test("All", allBooks[curPos]);
                     if (allBooks[curPos]->sortOrder == INT_MIN) break;
                 }
-//                for(int i = 0; (allBooks[curPos]->borrowers)[i] != NULL; i++) {
-//                    searchMatch = determineSearchMatch((allBooks[curPos]->borrowers)[i], searchText);
-//                    if (searchMatch < allBooks[curPos]->sortOrder)
-//                        allBooks[curPos]->sortOrder =  searchMatch;
-//                    test("All", allBooks[curPos]);
-//                    if (allBooks[curPos]->sortOrder == INT_MIN) break;
-//                }
-                
                 break;
-                
             case scISBN:
                 allBooks[curPos]->sortOrder = determineSearchMatch(allBooks[curPos]->isbn, searchText);
-                test("ISBN", allBooks[curPos]);
-                
                 break;
-                
             case scTitle:
                 allBooks[curPos]->sortOrder = determineSearchMatch(allBooks[curPos]->title, searchText);
-                test("Title", allBooks[curPos]);
                 break;
-                
             case scAuthor:
                 for(int i = 0; (allBooks[curPos]->author)[i] != NULL; i++) {
                     searchMatch = determineSearchMatch((allBooks[curPos]->author)[i], searchText);
                     if (searchMatch < allBooks[curPos]->sortOrder)
                         allBooks[curPos]->sortOrder =  searchMatch;
-                    test("Author", allBooks[curPos]);
                     if (allBooks[curPos]->sortOrder == INT_MIN) break;
                 }
                 break;
-                
-//            case scBorrower:
-//                for(int i = 0; (allBooks[curPos]->borrowers)[i] != NULL; i++) {
-//                    searchMatch = determineSearchMatch((allBooks[curPos]->borrowers)[i], searchText);
-//                    if (searchMatch < allBooks[curPos]->sortOrder)
-//                        allBooks[curPos]->sortOrder =  searchMatch;
-//                    test("Borrower", allBooks[curPos]);
-//                    if (allBooks[curPos]->sortOrder == INT_MIN) break;
-//                }
-//                break;
-                
             default:
                 perror("Search criteria is not implemented!");
                 break;
         }
+        // Only add results with certain match
         if (allBooks[curPos]->sortOrder < 81) {
             result[resCnt] = allBooks[curPos];
             resCnt++;

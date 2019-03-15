@@ -43,7 +43,7 @@ void readFile(bookData ***books, char *fileName, void (*readNewLineEvent) (bookD
 void writeFile(char *fileName, const char *data) {
     char buffer[strlen(data) + 1];
     // Open file
-    FILE *file = fopen(fileName, "wb");
+    FILE *file = fopen(fileName, "w");
     // Error message if no file opened
     if(file == NULL) {
         perror("File");

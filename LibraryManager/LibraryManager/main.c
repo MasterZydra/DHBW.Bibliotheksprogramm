@@ -27,7 +27,7 @@ int main(int argc, const char * argv[]) {
     mainMenu(&data);
     // Test to write data
     char *bookDataCSV = bookDataToCSV(data);
-    writeFile("./test.txt", bookDataCSV);
+    writeFile("./lib.bd", bookDataCSV);
     // Free allocated memory
     freeBookDatas(&data);
     return 0;
