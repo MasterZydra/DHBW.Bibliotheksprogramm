@@ -119,7 +119,12 @@ int listMenu(bookData **listData) {
         terminalInput("%c", &input);
 
         if (input == '0') return 0;
-        if (input >= '1' && input <= '9') selectedBookMenu(listData[input - '1']);
+        if (input >= '1' && input <= '9') {
+            int pos = input - '1';
+            // Continue loop if input is greater then amount of books
+            if ((pos + 1) > countBooks(listData)) continue;
+            selectedBookMenu(listData[pos]);
+        }
     }
     return 0;
 }
