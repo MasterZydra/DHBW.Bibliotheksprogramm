@@ -89,19 +89,19 @@ void readNewLineEvent(bookData ***books, const char *line) {
     while (sub) {
         switch (dc) {
             case dcISBN:
-                (*books)[curPos]->isbn = allocMem(sub, (int)strlen(sub));
+                (*books)[curPos]->isbn = allocMem(sub, (int)strlen(sub) + 1);
                 break;
             case dcTitle:
-                (*books)[curPos]->title = allocMem(sub, (int)strlen(sub));
+                (*books)[curPos]->title = allocMem(sub, (int)strlen(sub) + 1);
                 break;
             case dcAuthor:
-                authors = allocMem(sub, (int)strlen(sub));
+                authors = allocMem(sub, (int)strlen(sub) + 1);
                 break;
             case dcAmount:
                 (*books)[curPos]->amount = (int) strtol(sub, (char **)NULL, 10);
                 break;
             case dcBorrower:
-                borrowers = allocMem(sub, (int)strlen(sub));
+                borrowers = allocMem(sub, (int)strlen(sub) + 1);
                 break;
             default:
                 printf("Error: Column will not be processed: '%s'\n", sub);
