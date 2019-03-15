@@ -124,11 +124,6 @@ int listMenu(bookData **listData) {
     return 0;
 }
 
-
-
-
-
-
 /**
  Show details of one book
 
@@ -145,8 +140,9 @@ int selectedBookMenu(bookData *selectedBook) {
 
         switch (input) {
             case '0': return 0;
-
-
+            case '1':
+                // Borrow book
+                borrowBook(selectedBook);
             default:
                 break;
         }
@@ -171,4 +167,29 @@ void addBook(bookData ***books) {
     free(author);
     getSubList(&(*books)[cnt]->borrowers, borrower);
     free(borrower);
+}
+
+/**
+ Borrow a book
+ 
+ @param selectedBook Book to borrow
+ */
+void borrowBook(bookData *selectedBook) {
+    printf("\n");
+    // Check if all books are lent
+    if (selectedBook->amount == countStrings(selectedBook->borrowers)) {
+        printf("(i) Info:\n");
+        printf("---------\n");
+        printf(" Alle %d Exemplare sind ausgeliehen.\n\n", selectedBook->amount);
+        
+        printf("Mit Enter fortfahren");
+        getchar();
+        return;
+    }
+    // Get name and add to bookData
+    char name[100];
+    printf("Bitte Name eingeben: (Abbruch mit '0')\n");
+    terminalInput("%s", &name);
+    if (strcmp(name, "0") == 0) return;
+    addSubstring(&selectedBook->borrowers, name);
 }

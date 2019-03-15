@@ -28,4 +28,6 @@ int selectedBookMenu(bookData *);
 
 void addBook(bookData ***);
 
+void borrowBook(bookData *);
+
 #endif /* programlogic_h */
