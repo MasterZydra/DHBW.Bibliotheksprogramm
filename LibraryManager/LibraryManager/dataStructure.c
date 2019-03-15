@@ -9,47 +9,67 @@
 #include "dataStructure.h"
 
 /**
- Free storage that is reserved for book data
+ Remove one book from the book array
+
+ @param books Pointer to book array
+ @param delete Pointer to book which will be removed
+ */
+void removeBook(bookData ***books, bookData *delete) {
+    // Allocate memory for new bookData array
+    bookData **newBooks = calloc(countBooks(*books), sizeof(bookData *));
+    // Iterate books and save pointer to new array
+    // Except for the book to delete
+    int cnt = 0;
+    for (int curPos = 0; (*books)[curPos] != NULL; curPos++) {
+        if ((*books)[curPos] == delete)
+            freeBookData(&(*books)[curPos]);
+        else {
+            newBooks[cnt] = (*books)[curPos];
+            cnt++;
+        }
+    }
+    // Free old memory area and return address
+    free(*books);
+    *books = newBooks;
+}
+
+/**
+ Free storage that is reserved for all book data
  
  @param bds Pointer to array of book data
  */
-void freeBookData(bookData ***bds) {
+void freeBookDatas(bookData ***bds) {
     for (int i = 0; (*bds)[i] != NULL; i++){
-        freeSubBookData(&(*bds)[i]->author);
-        freeSubBookData(&(*bds)[i]->borrowers);
-        free((*bds)[i]->isbn);
-        free((*bds)[i]->title);
-        free((*bds)[i]);
+        freeBookData(&(*bds)[i]);
     }
     free(*bds);
 }
 
 /**
- Print data in bookData pointer pointer
-
- @param books BookData pointer pointer
+ Free storage that is reserved for one book
+ 
+ @param bd Pointer to array of book data
  */
-void printBookData(bookData **books) {
-    clear_screen();
-    for (int curPos = 0; books[curPos] != NULL; curPos++) {
-        printf("Book %i\n", curPos + 1);
-        printf("  Titel: %s\n", books[curPos]->title);
-        printf("  ISBN: %s\n", books[curPos]->isbn);
-        printf("  Amount: %i\n", books[curPos]->amount);
-        for(int i = 0; (books[curPos]->author)[i] != NULL; i++) {
-            printf("  Author %i: %s\n", i+1, (books[curPos]->author)[i]);
-        }
-        for(int i = 0; (books[curPos]->borrowers)[i] != NULL; i++) {
-            printf("  Borrower %i: %s\n", i+1, (books[curPos]->borrowers)[i]);
-        }
-        printf("  SortOrder: %i\n", books[curPos]->sortOrder);
-        printf("\n");
-    }
+void freeBookData(bookData **bd) {
+    freeSubBookData(&bd[0]->author);
+    freeSubBookData(&bd[0]->borrowers);
+    free(bd[0]->isbn);
+    free(bd[0]->title);
+    free(bd[0]);
+}
+
+/**
+ Sort bookData array
+ 
+ @param books Pointer to bookData array
+ */
+void sortBooks(bookData **books) {
+    qsort(&(books[0]), countBooks(books), sizeof(bookData*), bookCompare);
 }
 
 /**
  Counts the number of books in the bookData array
-
+ 
  @param books Book array
  @return number of books
  */
@@ -57,6 +77,19 @@ int countBooks(bookData **books) {
     int cnt = 0;
     for (cnt = 0; books[cnt] != NULL; cnt++);
     return cnt;
+}
+
+/**
+ Compare two books by sortOrder
+ 
+ @param p1 Pointer to book
+ @param p2 Pointer to book
+ @return 1, -1 or 0
+ */
+int bookCompare(const void *p1, const void *p2) {
+    if (((bookData *)p1)->sortOrder < ((bookData *)p2)->sortOrder) return 1;
+    if (((bookData *)p1)->sortOrder > ((bookData *)p2)->sortOrder) return -1;
+    return 0;
 }
 
 /**
@@ -97,26 +130,4 @@ char *bookDataToCSV(bookData **books) {
     }
     addCharToPos('\0', csv, &cursorPos);
     return csv;
-}
-
-/**
- Compare two books by sortOrder
- 
- @param p1 Pointer to book
- @param p2 Pointer to book
- @return 1, -1 or 0
- */
-int bookCompare(const void *p1, const void *p2) {
-    if (((bookData *)p1)->sortOrder < ((bookData *)p2)->sortOrder) return 1;
-    if (((bookData *)p1)->sortOrder > ((bookData *)p2)->sortOrder) return -1;
-    return 0;
-}
-
-/**
- Sort bookData array
- 
- @param books Pointer to bookData array
- */
-void sortBooks(bookData **books) {
-    qsort(&(books[0]), countBooks(books), sizeof(bookData*), bookCompare);
 }

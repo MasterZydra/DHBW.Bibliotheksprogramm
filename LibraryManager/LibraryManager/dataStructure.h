@@ -24,16 +24,20 @@ typedef struct {
     int sortOrder;
 } bookData;
 
-void freeBookData(bookData ***);
+// Manage structure
+void removeBook(bookData ***, bookData *);
 
-void printBookData(bookData **);
+void freeBookDatas(bookData ***);
+
+void freeBookData(bookData **);
+
+// Help functions
+void sortBooks(bookData **books);
 
 int countBooks(bookData **books);
 
-char *bookDataToCSV(bookData **);
-
 int bookCompare(const void *, const void *);
 
-void sortBooks(bookData **books);
+char *bookDataToCSV(bookData **);
 
 #endif /* dataStructure_h */
