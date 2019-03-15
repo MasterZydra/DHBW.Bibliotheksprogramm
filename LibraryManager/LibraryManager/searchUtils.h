@@ -26,6 +26,8 @@ typedef enum {
 
 char *findSubstring(char **, char *);
 
+int determineSearchMatch(char *, char *);
+
 bookData **searchBooks(searchCol, bookData **, char *);
 
 int levenshtein(const char *, const char *);

@@ -23,6 +23,13 @@ char *findSubstring(char **stringArr, char *search) {
     return result;
 }
 
+/**
+ Rate a search result
+
+ @param data Pointer to data
+ @param searchText Pointer to search text
+ @return INT_MIN = Conformity, Neg number = Contains search text, Pos num = Similar
+ */
 int determineSearchMatch(char *data, char *searchText) {
     // Return INT_MIN if text is identical
     if (strcmp(data, searchText) == 0) return INT_MIN;
@@ -37,24 +44,27 @@ bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
     bookData **result = calloc(1, sizeof(bookData**));
     int resCnt = 0;
     int searchMatch;
-    
-    
+    // Loop all boos
     for (int curPos = 0; allBooks[curPos] != NULL; curPos++) {
+        // Set start value. INT_MAX = No match
         allBooks[curPos]->sortOrder = INT_MAX;
-        printf("Val: %i\n", allBooks[curPos]->sortOrder);
-        printf("new book\n");
         switch (sc) {
             case scAll:
                 searchMatch = determineSearchMatch(allBooks[curPos]->isbn, searchText);
+                // Only save value if it is smaller
                 if (searchMatch < allBooks[curPos]->sortOrder) allBooks[curPos]->sortOrder = searchMatch;
+                // Break loop if it is alread a perfect match
                 if (allBooks[curPos]->sortOrder == INT_MIN) break;
                 searchMatch = determineSearchMatch(allBooks[curPos]->title, searchText);
+                // Only save value if it is smaller
                 if (searchMatch < allBooks[curPos]->sortOrder) allBooks[curPos]->sortOrder = searchMatch;
+                // Break loop if it is alread a perfect match
                 if (allBooks[curPos]->sortOrder == INT_MIN) break;
                 for(int i = 0; (allBooks[curPos]->author)[i] != NULL; i++) {
                     searchMatch = determineSearchMatch((allBooks[curPos]->author)[i], searchText);
-                    if (searchMatch < allBooks[curPos]->sortOrder)
-                        allBooks[curPos]->sortOrder =  searchMatch;
+                    // Only save value if it is smaller
+                    if (searchMatch < allBooks[curPos]->sortOrder) allBooks[curPos]->sortOrder =  searchMatch;
+                    // Break loop if it is alread a perfect match
                     if (allBooks[curPos]->sortOrder == INT_MIN) break;
                 }
                 break;
@@ -67,8 +77,9 @@ bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
             case scAuthor:
                 for(int i = 0; (allBooks[curPos]->author)[i] != NULL; i++) {
                     searchMatch = determineSearchMatch((allBooks[curPos]->author)[i], searchText);
-                    if (searchMatch < allBooks[curPos]->sortOrder)
-                        allBooks[curPos]->sortOrder =  searchMatch;
+                    // Only save value if it is smaller
+                    if (searchMatch < allBooks[curPos]->sortOrder) allBooks[curPos]->sortOrder =  searchMatch;
+                    // Break loop if it is alread a perfect match
                     if (allBooks[curPos]->sortOrder == INT_MIN) break;
                 }
                 break;
@@ -82,13 +93,9 @@ bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
             resCnt++;
             result = reallocMemCalloc(result, resCnt + 1, sizeof(bookData *), resCnt);
         }
-        else {
-            printf("No match: %s\n", allBooks[curPos]->title);
-        }
     }
     return result;
 }
-
 
 /**
  Process the Levenshtein distance. It is a string metric for measuring
