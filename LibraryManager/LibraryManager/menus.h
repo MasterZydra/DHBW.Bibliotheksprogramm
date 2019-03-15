@@ -91,7 +91,7 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 
 #define SELECTEDBOOK_MENU() {\
     printf(" 1 Ausleihen\n");\
-    printf(" 2 Zurück geben\n");\
+    printf(" 2 Zurückgeben\n");\
 }
 
 #endif /* menus_h */

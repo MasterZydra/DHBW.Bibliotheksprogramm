@@ -31,14 +31,4 @@ int main(int argc, const char * argv[]) {
     // Free allocated memory
     freeBookDatas(&data);
     return 0;
-    
-//    char a = getchar();
-//    if (a == 10) printf("is 10\n");
-//    if (a == '\n') printf("is /n\n");
-      //  return 0;
-    
-    // Ideen:
-    // Einstellungen
-    //   - Mehrsprachigkeit
-    //   - 
 }
