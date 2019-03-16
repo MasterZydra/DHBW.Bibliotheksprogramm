@@ -32,6 +32,10 @@ void printRemoveBook(void);
 
 void printAddBook(void);
 
+void printInfo(void);
+
+void printContinue(void);
+
 #define TITLE() {\
 printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 printf(" Bibliotheksprogramm\n");\
@@ -99,6 +103,17 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
     printf("\n");\
     printf("Buch hinzuf%cgen\n", ue);\
     printf("--------------\n");\
+}
+
+#define INFO() {\
+    printf("\n");\
+    printf("(i) Info:\n");\
+    printf("---------\n");\
+}
+
+#define CONTINUE() {\
+    printf("\n\n");\
+    printf("Mit Enter fortfahren");\
 }
 
 #endif /* menus_h */

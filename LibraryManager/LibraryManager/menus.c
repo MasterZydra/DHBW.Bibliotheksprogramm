@@ -148,9 +148,8 @@ void printSelectedBookData(bookData *selectedBook)
     MENU_INPUT();
 }
 
-
 /**
- 
+ Show menu for book removal
  */
 void printRemoveBook() {
     clear_screen();
@@ -158,8 +157,25 @@ void printRemoveBook() {
     REMOVE_BOOK();
 }
 
+/**
+ Show menu for book addition
+ */
 void printAddBook() {
     clear_screen();
     TITLE();
     ADD_BOOK();
+}
+
+/**
+ Show info text
+ */
+void printInfo() {
+    INFO();
+}
+
+/**
+ Show text to continue
+ */
+void printContinue() {
+    CONTINUE();
 }
