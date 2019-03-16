@@ -92,7 +92,6 @@ int searchMenuText(bookData ***books, searchCol sc) {
     printSearchMenuText(sc);
 
     input = getLine();
-    //terminalInput("%s", input);
 
     if (strcmp(input, "0") == 0) {
         free(input);
@@ -297,13 +296,17 @@ void borrowBook(bookData *selectedBook) {
     }
     // Get name and add to bookData
     char *name = NULL;
-    printf("\n");
-    printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
-    name = getLine();
-
-    //terminalInput("%s", &name);
-    if (strcmp(name, "0") == 0) return;
+    while (name == NULL || strcmp(name, "") == 0) {
+        printf("\n");
+        printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
+        name = getLine();
+    }
+    if (strcmp(name, "0") == 0) {
+        free(name);
+        return;
+    }
     addSubstring(&selectedBook->borrowers, name);
+    free(name);
 }
 
 /**
@@ -322,11 +325,15 @@ void returnBook(bookData *selectedBook) {
     }
     
     char *name = NULL;
-    printf("\n");
-    printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
-    name = getLine();
-    //terminalInput("%s", &name);
-    if (strcmp(name, "0") == 0) return;
+    while (name == NULL || strcmp(name, "") == 0) {
+        printf("\n");
+        printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
+        name = getLine();
+    }
+    if (strcmp(name, "0") == 0) {
+        free(name);
+        return;
+    }
 
     char *borrower = findSubstring(selectedBook->borrowers, name);
     if (borrower != NULL) {
@@ -338,4 +345,5 @@ void returnBook(bookData *selectedBook) {
         printContinue();
         getchar();
     }
+    free(name);
 }
