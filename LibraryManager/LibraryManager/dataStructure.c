@@ -52,9 +52,8 @@ void removeBook(bookData ***books, bookData *delete) {
  @param bds Pointer to array of book data
  */
 void freeBookDatas(bookData ***bds) {
-    for (int i = 0; (*bds)[i] != NULL; i++){
+    for (int i = 0; (*bds)[i] != NULL; i++)
         freeBookData(&(*bds)[i]);
-    }
     free(*bds);
 }
 

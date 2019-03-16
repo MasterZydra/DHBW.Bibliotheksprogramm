@@ -171,10 +171,11 @@ int selectedBookMenu(bookData *selectedBook) {
  @param books Pointer to book array
  */
 void menuAddBook(bookData ***books) {
+    printAddBook();
+    
     char input[200];
     char *inputLine = NULL;
     // Get ISBN
-    printf("\n");
     printf("Bitte ISBN eingeben: (Abbruch mit '0')\n");
     terminalInput("%s", &input);
     // User abort
@@ -213,7 +214,7 @@ void menuAddBook(bookData ***books) {
     // Save authors
     while (inputLine == NULL || strcmp(inputLine, "") == 0) {
         printf("\n");
-        printf("Bitte Autoren eingeben: (Mehrere durch ';' abtrennen\n");
+        printf("Bitte Autoren eingeben: (Mehrere durch ';' abtrennen)\n");
         inputLine = getLine();
     }
     getSubList(&book->author, inputLine);
@@ -229,9 +230,10 @@ void menuAddBook(bookData ***books) {
  @param books Pointer to book array
  */
 void menuRemoveBook(bookData ***books) {
+    printRemoveBook();
+    
     char input[200];
     // Get ISBN
-    printf("\n");
     printf("Bitte ISBN eingeben: (Abbruch mit '0')\n");
     terminalInput("%s", &input);
     // User abort
@@ -260,7 +262,7 @@ void menuRemoveBook(bookData ***books) {
         printf("\n");
         printf("(i) Info:\n");
         printf("---------\n");
-        printf("Buch kann nicht entfernt werden, da alle B%ccher verliehen sind.\n\n",ue);
+        printf("Buch kann nicht entfernt werden, da alle B%ccher verliehen sind.\n\n", ue);
         printf("Mit Enter fortfahren");
         getchar();
         return;
