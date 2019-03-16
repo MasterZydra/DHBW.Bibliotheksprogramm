@@ -22,12 +22,12 @@ int main(int argc, const char * argv[]) {
     // Allocate memory for bookData array
     bookData **data = calloc(1, sizeof(bookData**));
     // Read content from file
-    readFile(&data, "./lib.bd", readNewLineEvent);
+    readFile(&data, "./lib.txt", readNewLineEvent);
     // Execute logic for main menu
     mainMenu(&data);
     // Test to write data
     char *bookDataCSV = bookDataToCSV(data);
-    writeFile("./lib.bd", bookDataCSV);
+    writeFile("./lib.txt", bookDataCSV);
     // Free allocated memory
     freeBookDatas(&data);
     return 0;
