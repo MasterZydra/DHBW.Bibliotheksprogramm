@@ -16,6 +16,8 @@
 #include <ctype.h>
 
 // Functions for managing the terminal
+char *getLine(void);
+
 int terminalInput(const char *, ...);
 
 void clear_inputBuffer(void);

@@ -9,6 +9,46 @@
 #include "utils.h"
 
 /**
+ Read line from terminal
+
+ @return Pointer to line
+ */
+char *getLine() {
+    char *line = malloc(100);
+    char *lineP = line;
+    size_t lenmax = 100;
+    size_t len = lenmax;
+    int c;
+    
+    if(line == NULL)
+        return NULL;
+    
+    for(;;) {
+        c = fgetc(stdin);
+        if(c == EOF)
+            break;
+        
+        if(--len == 0) {
+            len = lenmax;
+            char *lines = realloc(lineP, lenmax *= 2);
+            
+            if(lineP == NULL) {
+                free(lineP);
+                return NULL;
+            }
+            line = lines + (line - lineP);
+            lineP = lines;
+        }
+        // Leave loop on end of line and replace linebreak
+        if((*line++ = c) == '\n') {
+            *(line - 1) = '\0';
+            break;
+        }
+    }
+    return lineP;
+}
+
+/**
  Read input with given format and empty keyboard buffer afterwards.
  Use it like scanf().
  
