@@ -186,11 +186,9 @@ void menuAddBook(bookData ***books) {
         // Check if ISBN is valid
         valid = isbnValidation(input);
         if (!valid) {
-            printf("\n");
-            printf("(i) Info:\n");
-            printf("---------\n");
-            printf("ISBN ist ung%cltig.\n\n", ue);
-            printf("Mit Enter fortfahren");
+            printInfo();
+            printf("ISBN ist ung%cltig.", ue);
+            printContinue();
             getchar();
         }
     }
@@ -260,21 +258,17 @@ void menuRemoveBook(bookData ***books) {
             book = results[i];
     // If match, add one copy
     if (book == NULL) {
-        printf("\n");
-        printf("(i) Info:\n");
-        printf("---------\n");
-        printf("Kein Buch mit ISBN '%s' gefunden.\n\n", input);
-        printf("Mit Enter fortfahren");
+        printInfo();
+        printf("Kein Buch mit ISBN '%s' gefunden.", input);
+        printContinue();
         getchar();
         return;
     }
-
+    // Only available books can be removed
     if (book->amount == countStrings(book->borrowers)) {
-        printf("\n");
-        printf("(i) Info:\n");
-        printf("---------\n");
-        printf("Buch kann nicht entfernt werden, da alle B%ccher verliehen sind.\n\n", ue);
-        printf("Mit Enter fortfahren");
+        printInfo();
+        printf("Buch kann nicht entfernt werden, da alle B%ccher verliehen sind.", ue);
+        printContinue();
         getchar();
         return;
     }
@@ -293,18 +287,17 @@ void menuRemoveBook(bookData ***books) {
  @param selectedBook Book to borrow
  */
 void borrowBook(bookData *selectedBook) {
-    printf("\n");
     // Check if all books are lent
     if (selectedBook->amount == countStrings(selectedBook->borrowers)) {
-        printf("(i) Info:\n");
-        printf("---------\n");
-        printf(" Alle %d Exemplare sind ausgeliehen.\n\n", selectedBook->amount);
-        printf("Mit Enter fortfahren");
+        printInfo();
+        printf("Alle %d Exemplare sind ausgeliehen.", selectedBook->amount);
+        printContinue();
         getchar();
         return;
     }
     // Get name and add to bookData
     char *name = NULL;
+    printf("\n");
     printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
     name = getLine();
 
@@ -321,11 +314,9 @@ void borrowBook(bookData *selectedBook) {
 void returnBook(bookData *selectedBook) {
     // Check if book is borrowed by someone
     if (countStrings(selectedBook->borrowers) == 0) {
-        printf("\n");
-        printf("(i) Info:\n");
-        printf("---------\n");
-        printf("Kein Ausleiher gefunden.\n\n");
-        printf("Mit Enter fortfahren");
+        printInfo();
+        printf("Kein Ausleiher gefunden.");
+        printContinue();
         getchar();
         return;
     }
@@ -342,11 +333,9 @@ void returnBook(bookData *selectedBook) {
         removeSubstring(&selectedBook->borrowers, borrower);
     }
     else {
-        printf("\n");
-        printf("(i) Info:\n");
-        printf("---------\n");
-        printf("Kein Ausleiher '%s' gefunden.\n\n", name);
-        printf("Mit Enter fortfahren");
+        printInfo();
+        printf("Kein Ausleiher gefunden.");
+        printContinue();
         getchar();
     }
 }
