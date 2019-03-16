@@ -27,9 +27,13 @@ void mainMenu(bookData ***books) {
                 // Search book
                 searchMenu(books, manageMode);
                 break;
-            case '4':
+            case '3':
                 // Add a book to list
                 menuAddBook(books);
+                break;
+            case '4':
+                // Remove a book from list
+                menuRemoveBook(books);
             default:
                 break;
         }
@@ -218,6 +222,57 @@ void menuAddBook(bookData ***books) {
     inputLine = NULL;
     // Add empty list of borrowers
     getSubList(&book->borrowers, "");
+}
+
+/**
+ Menu to remove
+
+ @param books Pointer to book array
+ */
+void menuRemoveBook(bookData ***books) {
+    char input[200];
+    // Get ISBN
+    printf("\n");
+    printf("Bitte ISBN eingeben: (Abbruch mit '0')\n");
+    terminalInput("%s", &input);
+    // User abort
+    if (strcmp(input, "0") == 0) {
+        return;
+    }
+    // Check if user book is already in list
+    bookData *book = NULL;
+    bookData **results = searchBooks(scISBN, *books, input);
+    // Search perfect match
+    for (int i=0; results[i] != NULL; i++)
+        if (results[i]->sortOrder == INT_MIN)
+            book = results[i];
+    // If match, add one copy
+    if (book == NULL) {
+        printf("\n");
+        printf("(i) Info:\n");
+        printf("---------\n");
+        printf("Kein Buch mit ISBN '%s' gefunden.\n\n", input);
+        printf("Mit Enter fortfahren");
+        getchar();
+        return;
+    }
+    
+    if (book->amount == countStrings(book->borrowers)) {
+        printf("\n");
+        printf("(i) Info:\n");
+        printf("---------\n");
+        printf("Buch kann nicht entfernt werden, da alle Bücher verliehen sind.\n\n");
+        printf("Mit Enter fortfahren");
+        getchar();
+        return;
+    }
+    
+    if (book->amount > 1) {
+        book->amount = book->amount - 1;
+    }
+    else {
+        removeBook(books, book);
+    }
 }
 
 /**

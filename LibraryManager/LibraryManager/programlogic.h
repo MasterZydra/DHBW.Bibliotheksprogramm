@@ -28,6 +28,8 @@ int selectedBookMenu(bookData *);
 
 void menuAddBook(bookData ***);
 
+void menuRemoveBook(bookData ***);
+
 void borrowBook(bookData *);
 
 void returnBook(bookData *);
