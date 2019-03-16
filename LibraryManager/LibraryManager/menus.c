@@ -109,6 +109,8 @@ void printListMenu(bookData **listData)
     printf("\n");
     
     BACK();
+    if (countBooks(listData) > 9)
+        NEXT_PAGE();
     MENU_FINISHLINE();
     LIST_MENU();
     MENU_INPUT();

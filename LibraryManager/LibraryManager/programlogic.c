@@ -26,10 +26,14 @@ void mainMenu(bookData ***books) {
                 searchMenu(books);
                 break;
             case '2':
+                // Show all books
+                listMenu(*books);
+                break;
+            case '3':
                 // Add a book to list
                 menuAddBook(books);
                 break;
-            case '3':
+            case '4':
                 // Remove a book from list
                 menuRemoveBook(books);
             default:
@@ -129,6 +133,7 @@ int listMenu(bookData **listData) {
             if ((pos + 1) > countBooks(listData)) continue;
             selectedBookMenu(listData[pos]);
         }
+        if (input == 'n' && countBooks(listData) > 9) listMenu(&(listData[9]));
     }
     return 0;
 }

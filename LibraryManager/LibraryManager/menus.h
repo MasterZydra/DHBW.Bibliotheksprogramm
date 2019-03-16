@@ -46,14 +46,19 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
     printf(" 0 Zur%cck\n", ue);\
 }
 
+#define NEXT_PAGE() {\
+    printf(" n N%cchste Seite\n", ae);\
+}
+
 #define MAINMENU() {\
     printf(" 0 Beenden\n");\
     printf(" 1 Buch suchen\n");\
+    printf(" 2 Alle B%ccher anzeigen\n", ue);\
     printf("~~~~~~~~~~~~~~~~~~~~~\n");\
     printf(" Verwaltung:\n");\
     printf(" -----------\n");\
-    printf(" 2 Buch hinzuf%cgen\n", ue);\
-    printf(" 3 Buch entfernen\n");\
+    printf(" 3 Buch hinzuf%cgen\n", ue);\
+    printf(" 4 Buch entfernen\n");\
 }
 
 #define SEARCHMENU() {\
