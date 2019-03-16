@@ -320,7 +320,15 @@ void borrowBook(bookData *selectedBook) {
  */
 void returnBook(bookData *selectedBook) {
     // Check if book is borrowed by someone
-    if (countStrings(selectedBook->borrowers) == 0) return;
+    if (countStrings(selectedBook->borrowers) == 0) {
+        printf("\n");
+        printf("(i) Info:\n");
+        printf("---------\n");
+        printf("Kein Ausleiher gefunden.\n\n");
+        printf("Mit Enter fortfahren");
+        getchar();
+        return;
+    }
     
     char *name = NULL;
     printf("\n");
