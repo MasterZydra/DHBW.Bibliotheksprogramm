@@ -9,15 +9,16 @@ In einer Liste werden die Bücher erfasst. Folgende Daten sollen enthalten sein:
 - Liste der Ausleiher
 
 ## Funktionalität
-- [ ] Bücher suchen und anzeigen
-- [ ] Buch ausleihen
-- [ ] Buch zurückgeben
-- [ ] Buch einfügen
-- [ ] Buch löschen
+- [x] Bücher suchen und anzeigen
+- [x] Buch ausleihen
+- [x] Buch zurückgeben
+- [x] Buch einfügen
+- [x] Buch löschen
 
 ## Checkliste Implementierung
+- [x] Leere Bücherliste erstellen, wenn Datei nicht existiert
+- [x] Liste vor dem Beenden in Datei speichern
 - [ ] Daten "verschlüsselt speichern" (Binary?)
-- [ ] Liste vor dem Beenden speichern
 - [ ] Prüfen der Gültigkeit der ISBN --> Prüfziffer
 
 ## Bedingungen
