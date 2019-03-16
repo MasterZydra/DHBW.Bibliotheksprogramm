@@ -101,7 +101,7 @@ bookData **searchBooks(searchCol sc, bookData **allBooks, char *searchText) {
                 break;
         }
         // Only add results with certain match
-        if (allBooks[curPos]->sortOrder < 81) {
+        if (allBooks[curPos]->sortOrder < 71) {
             result[resCnt] = allBooks[curPos];
             resCnt++;
             result = reallocMemCalloc(result, resCnt + 1, sizeof(bookData *), resCnt);
