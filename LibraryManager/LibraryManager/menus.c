@@ -74,7 +74,7 @@ void printListMenu(bookData **listData)
     TITLE();
     LIST_HEADLINE();
 
-    for (int i=0; (i < 10) && (listData[i] != NULL);i++) {
+    for (int i=0; (i < 9) && (listData[i] != NULL);i++) {
         // Print number and title
         printf(" %d | %-27s|", i+1, listData[i]->title);
         // Build string contains authors with max length of 29
@@ -97,7 +97,7 @@ void printListMenu(bookData **listData)
         free(authors);
     }
     printf("\n");
-
+    
     BACK();
     MENU_FINISHLINE();
     LIST_MENU();
@@ -123,15 +123,31 @@ void printSelectedBookData(bookData *selectedBook)
     // ISBN
     printf("ISBN:              %s\n",selectedBook->isbn);
     // Amount
-    printf("Verf%cgbare B%ccher: %d\n",ue,ue,selectedBook->amount);
+    printf("Verfügbare Bücher: %d\n",selectedBook->amount);
     // All borrowers
     printf("Ausleiher:         %s",selectedBook->borrowers[0]);
     for (int i = 1; selectedBook->borrowers[i] != NULL; i++)
         printf(", %s", selectedBook->borrowers[i]);
     printf("\n\n");
-
+    
     BACK();
     SELECTEDBOOK_MENU();
     MENU_FINISHLINE();
     MENU_INPUT();
+}
+
+
+/**
+ 
+ */
+void printRemoveBook() {
+    clear_screen();
+    TITLE();
+    REMOVE_BOOK();
+}
+
+void printAddBook() {
+    clear_screen();
+    TITLE();
+    ADD_BOOK();
 }

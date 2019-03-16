@@ -28,6 +28,9 @@ void printListMenu(bookData **);
 
 void printSelectedBookData(bookData *);
 
+void printRemoveBook(void);
+
+void printAddBook(void);
 
 #define TITLE() {\
 printf("~~~~~~~~~~~~~~~~~~~~~\n");\
@@ -36,7 +39,7 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define BACK() {\
-    printf(" 0 Zur%cck\n",ue);\
+    printf(" 0 Zur%cck\n", ue);\
 }
 
 #define MAINMENU() {\
@@ -45,7 +48,7 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
     printf("~~~~~~~~~~~~~~~~~~~~~\n");\
     printf(" Verwaltung:\n");\
     printf(" -----------\n");\
-    printf(" 2 Buch hinzuf%cgen\n",ue);\
+    printf(" 2 Buch hinzuf%cgen\n", ue);\
     printf(" 3 Buch entfernen\n");\
 }
 
@@ -77,13 +80,25 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define LIST_MENU() {\
-    printf("Buch ausw%chlen %cber den Index i.\n",ae,ue);\
+    printf("Buch ausw%chlen %cber den Index i.\n", ae, ue);\
     printf("Bitte passendes i eingeben.\n");\
 }
 
 #define SELECTEDBOOK_MENU() {\
     printf(" 1 Ausleihen\n");\
-    printf(" 2 Zur%cckgeben\n",ue);\
+    printf(" 2 Zur%cckgeben\n", ue);\
+}
+
+#define REMOVE_BOOK() {\
+    printf("\n");\
+    printf("Buch entfernen\n");\
+    printf("--------------\n");\
+}
+
+#define ADD_BOOK() {\
+    printf("\n");\
+    printf("Buch hinzuf%cgen\n", ue);\
+    printf("--------------\n");\
 }
 
 #endif /* menus_h */
