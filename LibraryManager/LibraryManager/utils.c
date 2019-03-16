@@ -19,10 +19,6 @@ char *getLine() {
     size_t lenmax = 100;
     size_t len = lenmax;
     int c;
-    
-    if(line == NULL)
-        return NULL;
-    
     for(;;) {
         c = fgetc(stdin);
         if(c == EOF)
