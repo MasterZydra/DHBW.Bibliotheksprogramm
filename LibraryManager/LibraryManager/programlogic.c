@@ -27,7 +27,9 @@ void mainMenu(bookData ***books) {
                 // Search book
                 searchMenu(books, manageMode);
                 break;
-
+            case '4':
+                // Add a book to list
+                menuAddBook(books);
             default:
                 break;
         }
@@ -160,23 +162,62 @@ int selectedBookMenu(bookData *selectedBook) {
     return 0;
 }
 
-void addBook(bookData ***books) {
-    // Increase size of book array
-    int cnt = countBooks(*books);
-    *books = (bookData **)reallocMemCalloc(*books, cnt + 2, sizeof(bookData*), cnt);
-    // Allocate space for one book
-    (*books)[cnt] = malloc(sizeof(bookData));
-    
-    (*books)[cnt]->isbn = allocMem("12345678", strlen("12345678") + 1);
-    (*books)[cnt]->title = allocMem("test book", strlen("test book") + 1);
-    (*books)[cnt]->sortOrder = -1;
-    (*books)[cnt]->amount = 99;
-    char *author = allocMem("TestAuthor;", strlen("TestAuthor;") + 1);
-    char *borrower = allocMem("", strlen("") + 1);
-    getSubList(&(*books)[cnt]->author, author);
-    free(author);
-    getSubList(&(*books)[cnt]->borrowers, borrower);
-    free(borrower);
+/**
+ Menu to add a new book to the list
+
+ @param books Pointer to book array
+ */
+void menuAddBook(bookData ***books) {
+    char input[200];
+    char *inputLine = NULL;
+    // Get ISBN
+    printf("\n");
+    printf("Bitte ISBN eingeben: (Abbruch mit '0')\n");
+    terminalInput("%s", &input);
+    // User abort
+    if (strcmp(input, "0") == 0) {
+        return;
+    }
+    // Check if user book is already in list
+    bookData *book = NULL;
+    bookData **results = searchBooks(scISBN, *books, input);
+    // Search perfect match
+    for (int i=0; results[i] != NULL; i++)
+        if (results[i]->sortOrder == INT_MIN)
+            book = results[i];
+    // If match, add one copy
+    if (book != NULL) {
+        book->amount = book->amount + 1;
+        return;
+    }
+    // Else add a new book
+    addBook(books);
+    book = (*books)[countBooks(*books) - 1];
+    // Fill book data with details
+    book->amount = 1;
+    book->sortOrder = 0;
+    // Save isbn
+    book->isbn = allocMem(input, (int)strlen(input) + 1);
+    // Save title
+    while (inputLine == NULL || strcmp(inputLine, "") == 0) {
+        printf("\n");
+        printf("Bitte Titel eingeben:\n");
+        inputLine = getLine();
+        book->title = allocMem(inputLine, (int)strlen(inputLine) + 1);
+    }
+    free(inputLine);
+    inputLine = NULL;
+    // Save authors
+    while (inputLine == NULL || strcmp(inputLine, "") == 0) {
+        printf("\n");
+        printf("Bitte Autoren eingeben: (Mehrere durch ';' abtrennen\n");
+        inputLine = getLine();
+    }
+    getSubList(&book->author, inputLine);
+    free(inputLine);
+    inputLine = NULL;
+    // Add empty list of borrowers
+    getSubList(&book->borrowers, "");
 }
 
 /**

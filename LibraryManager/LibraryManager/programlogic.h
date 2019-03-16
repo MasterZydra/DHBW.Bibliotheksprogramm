@@ -26,7 +26,7 @@ int listMenu(bookData **);
 
 int selectedBookMenu(bookData *);
 
-void addBook(bookData ***);
+void menuAddBook(bookData ***);
 
 void borrowBook(bookData *);
 
