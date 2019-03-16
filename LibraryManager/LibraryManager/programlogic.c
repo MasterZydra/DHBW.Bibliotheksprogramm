@@ -90,7 +90,9 @@ int searchMenuText(bookData ***books, searchCol sc) {
     char *input = (char *)calloc(100, sizeof(char));
     
     printSearchMenuText(sc);
-    terminalInput("%s", input);
+    
+    input = getLine();
+    //terminalInput("%s", input);
 
     if (strcmp(input, "0") == 0) {
         free(input);
@@ -289,9 +291,11 @@ void borrowBook(bookData *selectedBook) {
         return;
     }
     // Get name and add to bookData
-    char name[100];
+    char *name = NULL;
     printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
-    terminalInput("%s", &name);
+    name = getLine();
+    
+    //terminalInput("%s", &name);
     if (strcmp(name, "0") == 0) return;
     addSubstring(&selectedBook->borrowers, name);
 }
@@ -302,10 +306,11 @@ void borrowBook(bookData *selectedBook) {
  @param selectedBook Book to return
  */
 void returnBook(bookData *selectedBook) {
-    char name[100];
+    char *name = NULL;//[100];
     printf("\n");
     printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
-    terminalInput("%s", &name);
+    name = getLine();
+    //terminalInput("%s", &name);
     if (strcmp(name, "0") == 0) return;
     
     char *borrower = findSubstring(selectedBook->borrowers, name);

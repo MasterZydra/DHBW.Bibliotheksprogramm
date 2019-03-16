@@ -83,6 +83,9 @@ void clear_inputBuffer()
  */
 void clear_screen()
 {
+#if defined(_WIN32) || defined(_WIN64)
+    system("cls");
+#endif
 #ifdef WINDOWS
     system("cls");
 #endif
