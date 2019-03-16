@@ -319,7 +319,10 @@ void borrowBook(bookData *selectedBook) {
  @param selectedBook Book to return
  */
 void returnBook(bookData *selectedBook) {
-    char *name = NULL;//[100];
+    // Check if book is borrowed by someone
+    if (countStrings(selectedBook->borrowers) == 0) return;
+    
+    char *name = NULL;
     printf("\n");
     printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
     name = getLine();
