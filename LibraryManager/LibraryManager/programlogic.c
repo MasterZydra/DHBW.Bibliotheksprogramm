@@ -13,7 +13,7 @@
  */
 void mainMenu(bookData ***books) {
     char input = ' ';
-    
+
     while (true) {
         printMainMenu();
 
@@ -88,9 +88,9 @@ void searchMenu(bookData ***books) {
  */
 int searchMenuText(bookData ***books, searchCol sc) {
     char *input = (char *)calloc(100, sizeof(char));
-    
+
     printSearchMenuText(sc);
-    
+
     input = getLine();
     //terminalInput("%s", input);
 
@@ -255,17 +255,17 @@ void menuRemoveBook(bookData ***books) {
         getchar();
         return;
     }
-    
+
     if (book->amount == countStrings(book->borrowers)) {
         printf("\n");
         printf("(i) Info:\n");
         printf("---------\n");
-        printf("Buch kann nicht entfernt werden, da alle Bücher verliehen sind.\n\n");
+        printf("Buch kann nicht entfernt werden, da alle B%ccher verliehen sind.\n\n",ue);
         printf("Mit Enter fortfahren");
         getchar();
         return;
     }
-    
+
     if (book->amount > 1) {
         book->amount = book->amount - 1;
     }
@@ -276,7 +276,7 @@ void menuRemoveBook(bookData ***books) {
 
 /**
  Borrow a book
- 
+
  @param selectedBook Book to borrow
  */
 void borrowBook(bookData *selectedBook) {
@@ -294,7 +294,7 @@ void borrowBook(bookData *selectedBook) {
     char *name = NULL;
     printf("Bitte Name des Ausleihers eingeben: (Abbruch mit '0')\n");
     name = getLine();
-    
+
     //terminalInput("%s", &name);
     if (strcmp(name, "0") == 0) return;
     addSubstring(&selectedBook->borrowers, name);
@@ -312,7 +312,7 @@ void returnBook(bookData *selectedBook) {
     name = getLine();
     //terminalInput("%s", &name);
     if (strcmp(name, "0") == 0) return;
-    
+
     char *borrower = findSubstring(selectedBook->borrowers, name);
     if (borrower != NULL) {
         removeSubstring(&selectedBook->borrowers, borrower);

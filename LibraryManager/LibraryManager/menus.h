@@ -36,7 +36,7 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define BACK() {\
-    printf(" 0 Zurück\n");\
+    printf(" 0 Zur%cck\n",ue);\
 }
 
 #define MAINMENU() {\
@@ -45,7 +45,7 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
     printf("~~~~~~~~~~~~~~~~~~~~~\n");\
     printf(" Verwaltung:\n");\
     printf(" -----------\n");\
-    printf(" 2 Buch hinzufügen\n");\
+    printf(" 2 Buch hinzuf%cgen\n",ue);\
     printf(" 3 Buch entfernen\n");\
 }
 
@@ -77,13 +77,13 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define LIST_MENU() {\
-    printf("Buch auswählen über den Index i.\n");\
+    printf("Buch ausw%chlen %cber den Index i.\n",ae,ue);\
     printf("Bitte passendes i eingeben.\n");\
 }
 
 #define SELECTEDBOOK_MENU() {\
     printf(" 1 Ausleihen\n");\
-    printf(" 2 Zurückgeben\n");\
+    printf(" 2 Zur%cckgeben\n",ue);\
 }
 
 #endif /* menus_h */

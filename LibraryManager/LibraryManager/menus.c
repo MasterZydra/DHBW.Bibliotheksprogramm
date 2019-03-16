@@ -97,7 +97,7 @@ void printListMenu(bookData **listData)
         free(authors);
     }
     printf("\n");
-    
+
     BACK();
     MENU_FINISHLINE();
     LIST_MENU();
@@ -123,13 +123,13 @@ void printSelectedBookData(bookData *selectedBook)
     // ISBN
     printf("ISBN:              %s\n",selectedBook->isbn);
     // Amount
-    printf("Verfügbare Bücher: %d\n",selectedBook->amount);
+    printf("Verf%cgbare B%ccher: %d\n",ue,ue,selectedBook->amount);
     // All borrowers
     printf("Ausleiher:         %s",selectedBook->borrowers[0]);
     for (int i = 1; selectedBook->borrowers[i] != NULL; i++)
         printf(", %s", selectedBook->borrowers[i]);
     printf("\n\n");
-    
+
     BACK();
     SELECTEDBOOK_MENU();
     MENU_FINISHLINE();
