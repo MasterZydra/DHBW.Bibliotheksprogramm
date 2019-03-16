@@ -128,7 +128,9 @@ void printSelectedBookData(bookData *selectedBook)
     // Amount
     printf("Verf%cgbare B%ccher: %d\n", ue, ue, selectedBook->amount - countStrings(selectedBook->borrowers));
     // All borrowers
-    printf("Ausleiher:         %s",selectedBook->borrowers[0]);
+    printf("Ausleiher:         ");
+    if (selectedBook->borrowers[0] != NULL)
+        printf("%s", selectedBook->borrowers[0]);
     for (int i = 1; selectedBook->borrowers[i] != NULL; i++)
         printf(", %s", selectedBook->borrowers[i]);
     printf("\n\n");
