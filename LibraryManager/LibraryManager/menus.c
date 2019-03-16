@@ -138,8 +138,10 @@ void printSelectedBookData(bookData *selectedBook)
     printf("Ausleiher:         ");
     if (selectedBook->borrowers[0] != NULL)
         printf("%s", selectedBook->borrowers[0]);
-    for (int i = 1; selectedBook->borrowers[i] != NULL; i++)
-        printf(", %s", selectedBook->borrowers[i]);
+    for (int i = 1; selectedBook->borrowers[i] != NULL; i++) {
+        printf(",\n");
+        printf("                   %s", selectedBook->borrowers[i]);
+    }
     printf("\n\n");
     
     BACK();
