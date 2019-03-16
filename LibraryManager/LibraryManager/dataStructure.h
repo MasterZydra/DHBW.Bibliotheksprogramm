@@ -25,6 +25,8 @@ typedef struct {
 } bookData;
 
 // Manage structure
+void addBook(bookData ***);
+
 void removeBook(bookData ***, bookData *);
 
 void freeBookDatas(bookData ***);

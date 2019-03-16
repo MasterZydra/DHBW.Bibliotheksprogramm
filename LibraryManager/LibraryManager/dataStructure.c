@@ -9,6 +9,19 @@
 #include "dataStructure.h"
 
 /**
+ Add a book to book array
+
+ @param books Pointer to book array
+ */
+void addBook(bookData ***books) {
+    // Increase size of book array
+    int cnt = countBooks(*books);
+    *books = (bookData **)reallocMemCalloc(*books, cnt + 2, sizeof(bookData*), cnt);
+    // Allocate space for one book
+    (*books)[cnt] = malloc(sizeof(bookData));
+}
+
+/**
  Remove one book from the book array
 
  @param books Pointer to book array
@@ -99,7 +112,7 @@ int bookCompare(const void *p1, const void *p2) {
  @return Pointer to Memory with CSV string
  */
 char *bookDataToCSV(bookData **books) {
-    char* csv = malloc(sizeof(char) * 999);
+    char* csv = malloc(sizeof(char) * 10000);
     int cursorPos = 0;
     for (int curPos = 0; books[curPos] != NULL; curPos++) {
         // ISBN
