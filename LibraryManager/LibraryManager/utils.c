@@ -262,6 +262,7 @@ void addSubstring(char ***stringArr, char *newString) {
  */
 bool isbnValidation(char *ISBN) {
     int sum = 0;
+    if (strlen(ISBN) != 13) return false;
     for (int i = 0; i <= 12; i++)
     {
         if (ISBN[i] < '0' || ISBN[i] > '9')

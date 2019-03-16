@@ -78,16 +78,16 @@ void printListMenu(bookData **listData)
         // Trim length of title
         char title[28];
         int titleLen = (int)strlen(listData[i]->title);
-        memcpy(&title, listData[i]->title, (titleLen > 27) ? 27 : titleLen);
+        memcpy(&title, listData[i]->title, (titleLen > 27) ? 27 : titleLen + 1);
         title[27] = '\0';
         // Print number and title
         printf(" %d | %-27s|", i+1, title);
         // Build string contains authors with max length of 29
-        char *authors = malloc(31 * sizeof(char));
+        char authors[30];
         for (int j = 0; (listData[i]->author)[j] != NULL; j++) {
             if (j == 0) {
                 int len = (int)strlen((listData[i]->author)[j]) + 1;
-                memcpy(authors, listData[i]->author[j], ((len < 29) ? len : 28) );
+                memcpy(authors, listData[i]->author[j], ((len < 29) ? len : 29) );
             }
             else {
                 int len = (int)strlen(authors);
@@ -99,13 +99,12 @@ void printListMenu(bookData **listData)
                 memcpy(&authors[len], listData[i]->author[j], 30 - len);
             }
         }
-        authors[30] = '\0';
+        authors[29] = '\0';
         // Print rest of columns: authors, isbn, amount
         printf(" %-29s| %-13s | %3d |\n",
                authors,
                listData[i]->isbn,
                listData[i]->amount - countStrings(listData[i]->borrowers));
-        free(authors);
     }
     printf("\n");
     
