@@ -171,17 +171,28 @@ int selectedBookMenu(bookData *selectedBook) {
  @param books Pointer to book array
  */
 void menuAddBook(bookData ***books) {
-    printAddBook();
-    
     char input[200];
     char *inputLine = NULL;
+    bool valid = false;
     // Get ISBN
-    while (!isbnValidation(input)) {
+    while (!valid) {
+        printAddBook();
+        
         printf("Bitte ISBN eingeben: (Abbruch mit '0')\n");
         terminalInput("%s", &input);
         printf("\n");
         // User abort
         if (strcmp(input, "0") == 0) return;
+        // Check if ISBN is valid
+        valid = isbnValidation(input);
+        if (!valid) {
+            printf("\n");
+            printf("(i) Info:\n");
+            printf("---------\n");
+            printf("ISBN ist ung%cltig.\n\n", ue);
+            printf("Mit Enter fortfahren");
+            getchar();
+        }
     }
     // Check if user book is already in list
     bookData *book = NULL;
