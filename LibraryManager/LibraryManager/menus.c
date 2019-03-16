@@ -79,7 +79,7 @@ void printListMenu(bookData **listData)
         printf(" %d | %-27s|", i+1, listData[i]->title);
         // Build string contains authors with max length of 29
         char *authors = malloc(31 * sizeof(char));
-        for (int j = 0; (listData[i]->author)[j] != NULL && j < 5; j++) {
+        for (int j = 0; (listData[i]->author)[j] != NULL; j++) {
             if (j == 0) {
                 int len = (int)strlen((listData[i]->author)[j]) + 1;
                 memcpy(authors, listData[i]->author[j], ((len < 29) ? len : 28) );
@@ -93,7 +93,10 @@ void printListMenu(bookData **listData)
         }
         authors[30] = '\0';
         // Print rest of columns: authors, isbn, amount
-        printf(" %-29s| %-13s | %3d |\n", authors, listData[i]->isbn, listData[i]->amount);
+        printf(" %-29s| %-13s | %3d |\n",
+               authors,
+               listData[i]->isbn,
+               listData[i]->amount - countStrings(listData[i]->borrowers));
         free(authors);
     }
     printf("\n");
@@ -123,7 +126,7 @@ void printSelectedBookData(bookData *selectedBook)
     // ISBN
     printf("ISBN:              %s\n",selectedBook->isbn);
     // Amount
-    printf("Verf%cgbare B%ccher: %d\n", ue, ue, selectedBook->amount);
+    printf("Verf%cgbare B%ccher: %d\n", ue, ue, selectedBook->amount - countStrings(selectedBook->borrowers));
     // All borrowers
     printf("Ausleiher:         %s",selectedBook->borrowers[0]);
     for (int i = 1; selectedBook->borrowers[i] != NULL; i++)

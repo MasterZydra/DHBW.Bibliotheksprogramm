@@ -176,11 +176,12 @@ void menuAddBook(bookData ***books) {
     char input[200];
     char *inputLine = NULL;
     // Get ISBN
-    printf("Bitte ISBN eingeben: (Abbruch mit '0')\n");
-    terminalInput("%s", &input);
-    // User abort
-    if (strcmp(input, "0") == 0) {
-        return;
+    while (!isbnValidation(input)) {
+        printf("Bitte ISBN eingeben: (Abbruch mit '0')\n");
+        terminalInput("%s", &input);
+        printf("\n");
+        // User abort
+        if (strcmp(input, "0") == 0) return;
     }
     // Check if user book is already in list
     bookData *book = NULL;
@@ -204,7 +205,6 @@ void menuAddBook(bookData ***books) {
     book->isbn = allocMem(input, (int)strlen(input) + 1);
     // Save title
     while (inputLine == NULL || strcmp(inputLine, "") == 0) {
-        printf("\n");
         printf("Bitte Titel eingeben:\n");
         inputLine = getLine();
         book->title = allocMem(inputLine, (int)strlen(inputLine) + 1);
