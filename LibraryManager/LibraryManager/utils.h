@@ -14,6 +14,8 @@
 #include <string.h>
 #include <stdarg.h>
 #include <ctype.h>
+#include <stdbool.h>
+#include <math.h>
 
 #define AE (unsigned char)142
 #define ae (unsigned char)132
@@ -53,5 +55,8 @@ void *reallocMemCalloc(void *, int, int, int);
 void removeSubstring(char ***, char *);
 
 void addSubstring(char ***, char *);
+
+// Other functions
+bool isbnValidation(char *);
 
 #endif /* utils_h */

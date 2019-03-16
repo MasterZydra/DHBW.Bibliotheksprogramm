@@ -253,3 +253,20 @@ void addSubstring(char ***stringArr, char *newString) {
     // Add new string at end of list
     (*stringArr)[cnt] = allocMem(newString, (int)strlen(newString) + 1);
 }
+
+/**
+ Validate if number is a valid ISBN
+
+ @param ISBN Pointer to ISBN
+ @return true = valid, false = invalid
+ */
+bool isbnValidation(char *ISBN) {
+    int sum = 0;
+    for (int i = 0; i <= 12; i++)
+    {
+        if (ISBN[i] < '0' || ISBN[i] > '9')
+            return false;
+        sum = sum + (ISBN[i] - '0') * (int)pow(3, i % 2);
+    }
+    return sum % 10 == 0;
+}
