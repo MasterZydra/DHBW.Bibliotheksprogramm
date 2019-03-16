@@ -22,7 +22,6 @@ void readFile(bookData ***books, char *fileName, void (*readNewLineEvent) (bookD
     FILE *file = fopen(fileName, "r");
     // Error message if no file opened
     if(file == NULL) {
-        perror("File");
         return;
     }
     // Read each line and trigger readNewLine event
@@ -116,10 +115,14 @@ void readNewLineEvent(bookData ***books, const char *line) {
         getSubList(&(*books)[curPos]->author, authors);
         free(authors);
     }
+    else
+        (*books)[curPos]->author = calloc(1, sizeof(char*));
     // Process borrowers and save in struct
     if (borrowers != NULL) {
         getSubList(&(*books)[curPos]->borrowers, borrowers);
         free(borrowers);
     }
+    else
+        (*books)[curPos]->borrowers = calloc(1, sizeof(char*));
     (*books)[curPos]->sortOrder = curPos + 1;
 }
