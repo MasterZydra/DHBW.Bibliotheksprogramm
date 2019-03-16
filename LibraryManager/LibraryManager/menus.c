@@ -10,19 +10,11 @@
 
 /**
  Print main menu
-
- @param manageMode User is logged in
  */
-void printMainMenu(bool manageMode) {
+void printMainMenu() {
     clear_screen();
     TITLE();
     MAINMENU();
-    if (manageMode) {
-        MAINMENU_MANMODE();
-    }
-    else {
-        MAINMENU_NOMANMODE();
-    }
     MENU_FINISHLINE();
     MENU_INPUT();
 }

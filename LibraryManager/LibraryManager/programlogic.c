@@ -7,17 +7,15 @@
 //
 
 #include "programlogic.h"
-#include "menus.h"
 
 /**
  Logic and output for main menu
  */
 void mainMenu(bookData ***books) {
     char input = ' ';
-    bool manageMode = true;
-
+    
     while (true) {
-        printMainMenu(manageMode);
+        printMainMenu();
 
         terminalInput("%c", &input);
 
@@ -25,13 +23,13 @@ void mainMenu(bookData ***books) {
             case '0': return;
             case '1':
                 // Search book
-                searchMenu(books, manageMode);
+                searchMenu(books);
                 break;
-            case '3':
+            case '2':
                 // Add a book to list
                 menuAddBook(books);
                 break;
-            case '4':
+            case '3':
                 // Remove a book from list
                 menuRemoveBook(books);
             default:
@@ -44,9 +42,9 @@ void mainMenu(bookData ***books) {
 /**
  Menu for searching books
 
- @param manageMode User is logged in
+ @param books Pointer to book array
  */
-void searchMenu(bookData ***books, bool manageMode) {
+void searchMenu(bookData ***books) {
     char input = ' ';
     while (true) {
         printSearchMenu();
@@ -57,22 +55,22 @@ void searchMenu(bookData ***books, bool manageMode) {
             case '0': return;
             case '1':
                 // Search in all
-                if (searchMenuText(books, manageMode, scAll) == 0)
+                if (searchMenuText(books, scAll) == 0)
                     return;
                 break;
             case '2':
                 // Search in ISBN
-                if (searchMenuText(books, manageMode, scISBN) == 0)
+                if (searchMenuText(books, scISBN) == 0)
                     return;
                 break;
             case '3':
                 // Search in Title
-                if (searchMenuText(books, manageMode, scTitle) == 0)
+                if (searchMenuText(books, scTitle) == 0)
                     return;
                 break;
             case '4':
                 // Search in Author
-                if (searchMenuText(books, manageMode, scAuthor) == 0)
+                if (searchMenuText(books, scAuthor) == 0)
                     return;
                 break;
 
@@ -85,11 +83,10 @@ void searchMenu(bookData ***books, bool manageMode) {
 /**
  Menu for input of search text
 
- @param manageMode User is logged in
  @param sc Columns in which will be searched in
  @return 0 = Ok, 1 = Break
  */
-int searchMenuText(bookData ***books, bool manageMode, searchCol sc) {
+int searchMenuText(bookData ***books, searchCol sc) {
     char *input = (char *)calloc(100, sizeof(char));
     
     printSearchMenuText(sc);

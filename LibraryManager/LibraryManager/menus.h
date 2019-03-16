@@ -18,7 +18,7 @@
 #include "utils.h"
 #include "fileUtils.h"
 
-void printMainMenu(bool);
+void printMainMenu(void);
 
 void printSearchMenu(void);
 
@@ -42,19 +42,11 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 #define MAINMENU() {\
     printf(" 0 Beenden\n");\
     printf(" 1 Buch suchen\n");\
-    printf(" 2 Buch zurückgeben\n");\
     printf("~~~~~~~~~~~~~~~~~~~~~\n");\
     printf(" Verwaltung:\n");\
     printf(" -----------\n");\
-}
-
-#define MAINMENU_MANMODE() {\
-    printf(" 3 Buch hinzufügen\n");\
-    printf(" 4 Buch entfernen\n");\
-}
-
-#define MAINMENU_NOMANMODE() {\
-    printf(" 3 Anmelden\n");\
+    printf(" 2 Buch hinzufügen\n");\
+    printf(" 3 Buch entfernen\n");\
 }
 
 #define SEARCHMENU() {\

@@ -15,12 +15,13 @@
 #include "utils.h"
 #include "searchUtils.h"
 #include "dataStructure.h"
+#include "menus.h"
 
 void mainMenu(bookData ***);
 
-void searchMenu(bookData ***, bool);
+void searchMenu(bookData ***);
 
-int searchMenuText(bookData ***, bool, searchCol);
+int searchMenuText(bookData ***, searchCol);
 
 int listMenu(bookData **);
 
