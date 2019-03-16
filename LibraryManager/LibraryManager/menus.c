@@ -75,8 +75,13 @@ void printListMenu(bookData **listData)
     LIST_HEADLINE();
 
     for (int i=0; (i < 9) && (listData[i] != NULL);i++) {
+        // Trim length of title
+        char title[28];
+        int titleLen = (int)strlen(listData[i]->title);
+        memcpy(&title, listData[i]->title, (titleLen > 27) ? 27 : titleLen);
+        title[27] = '\0';
         // Print number and title
-        printf(" %d | %-27s|", i+1, listData[i]->title);
+        printf(" %d | %-27s|", i+1, title);
         // Build string contains authors with max length of 29
         char *authors = malloc(31 * sizeof(char));
         for (int j = 0; (listData[i]->author)[j] != NULL; j++) {
