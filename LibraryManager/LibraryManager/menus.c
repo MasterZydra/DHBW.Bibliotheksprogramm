@@ -86,6 +86,9 @@ void printListMenu(bookData **listData)
             }
             else {
                 int len = (int)strlen(authors);
+                // Check length before adding another author
+                if (len > 27) break;
+                // Add another author
                 addCharToPos(',', authors, &len);
                 addCharToPos(' ', authors, &len);
                 memcpy(&authors[len], listData[i]->author[j], 30 - len);
