@@ -18,8 +18,8 @@ In einer Liste werden die Bücher erfasst. Folgende Daten sollen enthalten sein:
 ## Checkliste Implementierung
 - [x] Leere Bücherliste erstellen, wenn Datei nicht existiert
 - [x] Liste vor dem Beenden in Datei speichern
-- [ ] Daten "verschlüsselt speichern" (Binary?)
-- [ ] Prüfen der Gültigkeit der ISBN --> Prüfziffer
+- [x] Prüfen der Gültigkeit der ISBN
+- [x] Alle Bücher anzeigen
 
 ## Bedingungen
 - Die Bearbeitung kann in Gruppen zu 2-3 Studierenden erfolgen. Alle Studierenden einer Gruppe erhalten die gleiche Bewertung.
