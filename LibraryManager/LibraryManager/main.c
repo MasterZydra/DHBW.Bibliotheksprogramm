@@ -29,6 +29,7 @@ int main(int argc, const char * argv[]) {
     char *bookDataCSV = bookDataToCSV(data);
     writeFile("./lib.txt", bookDataCSV);
     // Free allocated memory
+    free(bookDataCSV);
     freeBookDatas(&data);
     return 0;
 }
