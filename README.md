@@ -1,4 +1,12 @@
 # DHBW.Bibliotheksprogramm
+
+![Screenshot](img/MainScreen.png)  
+![Screenshot](img/BookList.png)
+
+## Kompilieren und Ausführen
+`gcc -Wall main.c searchUtils.c utils.c menus.c fileUtils.c programlogic.c dataStructure.c -o LibraryManager`  
+`./LibraryManager`
+
 ## Aufgabenstellung  
 C-Programm zur Verwaltung der Bücher einer Bibliothek.  
 In einer Liste werden die Bücher erfasst. Folgende Daten sollen enthalten sein:  
