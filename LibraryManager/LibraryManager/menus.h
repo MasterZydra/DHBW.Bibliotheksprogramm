@@ -43,21 +43,21 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define BACK() {\
-    printf(" 0 Zur%cck\n", ue);\
+    printf(" 0 Zurück\n");\
 }
 
 #define NEXT_PAGE() {\
-    printf(" n N%cchste Seite\n", ae);\
+    printf(" n Nächste Seite\n");\
 }
 
 #define MAINMENU() {\
     printf(" 0 Beenden\n");\
     printf(" 1 Buch suchen\n");\
-    printf(" 2 Alle B%ccher anzeigen\n", ue);\
+    printf(" 2 Alle Bücher anzeigen\n");\
     printf("~~~~~~~~~~~~~~~~~~~~~\n");\
     printf(" Verwaltung:\n");\
     printf(" -----------\n");\
-    printf(" 3 Buch hinzuf%cgen\n", ue);\
+    printf(" 3 Buch hinzufügen\n");\
     printf(" 4 Buch entfernen\n");\
 }
 
@@ -89,13 +89,13 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 }
 
 #define LIST_MENU() {\
-    printf("Buch ausw%chlen %cber den Index i.\n", ae, ue);\
+    printf("Buch auswählen über den Index i.\n");\
     printf("Bitte passendes i eingeben.\n");\
 }
 
 #define SELECTEDBOOK_MENU() {\
     printf(" 1 Ausleihen\n");\
-    printf(" 2 Zur%cckgeben\n", ue);\
+    printf(" 2 Zurückgeben\n");\
 }
 
 #define REMOVE_BOOK() {\
@@ -106,7 +106,7 @@ printf("~~~~~~~~~~~~~~~~~~~~~\n");\
 
 #define ADD_BOOK() {\
     printf("\n");\
-    printf("Buch hinzuf%cgen\n", ue);\
+    printf("Buch hinzufügen\n");\
     printf("--------------\n");\
 }
 
